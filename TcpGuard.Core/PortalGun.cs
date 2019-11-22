@@ -27,9 +27,9 @@ namespace TcpGuard.Core
 
         private async Task beginAcceptTcpClient()
         {
+            var tcpClient = await listener.AcceptTcpClientAsync();
             try
             {
-                var tcpClient = await listener.AcceptTcpClientAsync();
                 var targetTcpClient = new TcpClient();
                 Console.WriteLine($"{Assembly.GetEntryAssembly().GetName().Name}: [{tcpClient.Client.RemoteEndPoint}]Connected to [{model.Port}].");
                 Console.WriteLine($"{Assembly.GetEntryAssembly().GetName().Name}: Connecting to [{model.RemoteHost}:{model.RemotePort}].");
@@ -38,13 +38,18 @@ namespace TcpGuard.Core
                 var portal = new Portal(tcpClient.GetStream(), targetTcpClient.GetStream());
                 portal.Stoped += (sender, e) =>
                   {
+                      Console.WriteLine($"{Assembly.GetEntryAssembly().GetName().Name}: [{tcpClient.Client.RemoteEndPoint}] disconnected.");
+
                       try { targetTcpClient.Close(); } catch { }
                       try { tcpClient.Close(); } catch { }
                   };
                 portal.Start();
                 _ = beginAcceptTcpClient();
             }
-            catch { }
+            catch
+            {
+                try { tcpClient.Close(); } catch { }
+            }
         }
 
         public void Stop()

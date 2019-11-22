@@ -127,7 +127,7 @@
             0});
             this.nudLocalPort.Name = "nudLocalPort";
             this.nudLocalPort.Size = new System.Drawing.Size(174, 21);
-            this.nudLocalPort.TabIndex = 2;
+            this.nudLocalPort.TabIndex = 3;
             this.nudLocalPort.Value = new decimal(new int[] {
             3000,
             0,

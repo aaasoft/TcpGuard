@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,7 +14,7 @@ namespace TcpGuard.Core
 
         public event EventHandler Stoped;
 
-        public Portal(Stream streamA, Stream streamB) : this(streamA, streamB, 1 * 1024 * 1024) { }
+        public Portal(Stream streamA, Stream streamB) : this(streamA, streamB, 1 * 1024) { }
 
         public Portal(Stream streamA, Stream streamB, int bufferSize)
         {
@@ -28,15 +29,15 @@ namespace TcpGuard.Core
         {
             cts?.Cancel();
             cts = new CancellationTokenSource();
-            _ = beginReadStream(streamA, streamA_Buffer, streamB, streamB_Buffer, cts.Token);
-            _ = beginReadStream(streamB, streamB_Buffer, streamA, streamA_Buffer, cts.Token);
+            _ = beginReadStream(streamA, streamA_Buffer, streamB, cts.Token);
+            _ = beginReadStream(streamB, streamB_Buffer, streamA, cts.Token);
         }
 
-        private async Task beginReadStream(Stream streamA, byte[] streamA_buffer, Stream streamB, byte[] streamB_buffer, CancellationToken token)
+        private async Task beginReadStream(Stream streamA, byte[] buffer, Stream streamB, CancellationToken token)
         {
             try
             {
-                var ret = await streamA.ReadAsync(streamA_Buffer, 0, streamA_Buffer.Length);
+                var ret = await streamA.ReadAsync(buffer, 0, buffer.Length);
                 if (ret <= 0)
                 {
                     Stop();
@@ -44,13 +45,13 @@ namespace TcpGuard.Core
                 }
                 for (var i = 0; i < ret / 2; i++)
                 {
-                    var a = streamA_Buffer[i];
-                    streamA_Buffer[i] = streamA_Buffer[ret - 1 - i];
-                    streamA_Buffer[ret - 1 - i] = a;
+                    var a = buffer[i];
+                    buffer[i] = buffer[ret - 1 - i];
+                    buffer[ret - 1 - i] = a;
                 }
-                await streamB.WriteAsync(streamA_Buffer, 0, ret);
+                await streamB.WriteAsync(buffer, 0, ret);
                 await streamB.FlushAsync();
-                _ = beginReadStream(streamA, streamA_Buffer, streamB, streamB_Buffer, token);
+                _ = beginReadStream(streamA, buffer, streamB, token);
             }
             catch
             {
