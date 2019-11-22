@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29503.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcpGuardServer", "TcpGuardServer\TcpGuardServer.csproj", "{DAE62959-E954-4675-9EA8-D3A5479A05DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TcpGuardServer", "TcpGuardServer\TcpGuardServer.csproj", "{DAE62959-E954-4675-9EA8-D3A5479A05DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcpGuardClient", "TcpGuardClient\TcpGuardClient.csproj", "{B8CA1284-B016-4ED4-AAC8-538220A1BB8C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcpGuard.Core", "TcpGuard.Core\TcpGuard.Core.csproj", "{EA116B6C-97AF-4EC0-9E2F-09111D1CDC87}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcpGuardClient", "TcpGuardClient\TcpGuardClient.csproj", "{C5B2340B-2E6B-4332-8D62-646E6FD550A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +19,14 @@ Global
 		{DAE62959-E954-4675-9EA8-D3A5479A05DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DAE62959-E954-4675-9EA8-D3A5479A05DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DAE62959-E954-4675-9EA8-D3A5479A05DC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B8CA1284-B016-4ED4-AAC8-538220A1BB8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B8CA1284-B016-4ED4-AAC8-538220A1BB8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B8CA1284-B016-4ED4-AAC8-538220A1BB8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B8CA1284-B016-4ED4-AAC8-538220A1BB8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA116B6C-97AF-4EC0-9E2F-09111D1CDC87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA116B6C-97AF-4EC0-9E2F-09111D1CDC87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA116B6C-97AF-4EC0-9E2F-09111D1CDC87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA116B6C-97AF-4EC0-9E2F-09111D1CDC87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5B2340B-2E6B-4332-8D62-646E6FD550A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5B2340B-2E6B-4332-8D62-646E6FD550A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5B2340B-2E6B-4332-8D62-646E6FD550A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5B2340B-2E6B-4332-8D62-646E6FD550A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

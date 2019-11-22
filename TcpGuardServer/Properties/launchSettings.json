@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "TcpGuardServer": {
+      "commandName": "Project",
+      "commandLineArgs": "3010 123456"
+    }
+  }
+}
