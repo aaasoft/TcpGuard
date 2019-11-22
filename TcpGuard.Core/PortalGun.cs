@@ -4,10 +4,9 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
-using TcpGuard.Core;
 using TcpGuard.Core.Protocol.V1.Model;
 
-namespace TcpGuardServer
+namespace TcpGuard.Core
 {
     public class PortalGun
     {
