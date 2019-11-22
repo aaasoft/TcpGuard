@@ -62,6 +62,13 @@ namespace TcpGuard.Core
         {
             cts?.Cancel();
             cts = null;
+
+            try { streamA.Close(); }
+            catch { }
+            try { streamB.Close(); }
+            catch { }
+
+            Stoped?.Invoke(this, EventArgs.Empty);
         }
     }
 }
