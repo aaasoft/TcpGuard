@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using System.Net.Sockets;
 using System.Reflection;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using TcpGuard.Core.Protocol.V1.Pkgs;
@@ -14,12 +15,15 @@ namespace TcpGuard.Core
         private QpCommandHandler handler;
         private TcpClient tcpClient;
         private NetworkStream stream;
+
+        private int bufferIndex = 0;
         private byte[] buffer;
         private CancellationTokenSource cts;
+        private DateTime lastSendTime = DateTime.MinValue;
 
         public event EventHandler Stoped;
 
-        public Portal(QpCommandHandler handler, TcpClient tcpClient) : this(handler, tcpClient, 1 * 1024) { }
+        public Portal(QpCommandHandler handler, TcpClient tcpClient) : this(handler, tcpClient, 80 * 1024) { }
 
         public Portal(QpCommandHandler handler, TcpClient tcpClient, int bufferSize)
         {
@@ -43,13 +47,31 @@ namespace TcpGuard.Core
             if (e is TcpPackage)
             {
                 var package = (TcpPackage)e;
-                stream.WriteAsync(package.Buffer, 0, package.Buffer.Length);
+                try
+                {
+                    stream.Write(package.Buffer, 0, package.Buffer.Length);
+                    stream.Flush();
+                }
+                catch
+                {
+                    Stop();
+                }
             }
         }
 
         private Task beginReadStream(CancellationToken token)
         {
             return Task.Run(() => readStream(token));
+        }
+
+        private void flushBuffer()
+        {
+            var tmpBuffer = new byte[bufferIndex];
+            Array.Copy(buffer, 0, tmpBuffer, 0, bufferIndex);
+            handler.SendPackage(new TcpPackage()
+            {
+                Buffer = tmpBuffer
+            }).Wait();
         }
 
         private void readStream(CancellationToken token)
@@ -60,17 +82,24 @@ namespace TcpGuard.Core
                 {
                     if (token.IsCancellationRequested)
                         throw new TaskCanceledException();
+                    var freeBufferLength = buffer.Length - bufferIndex;
                     if (!stream.DataAvailable)
                     {
-                        Thread.Sleep(10);
+                        Thread.Sleep(100);
                         continue;
                     }
-                    var ret = stream.Read(buffer, 0, buffer.Length);
+                    var ret = stream.ReadAsync(buffer, bufferIndex, freeBufferLength, token).Result;
                     if (ret > 0)
                     {
-                        var tmpBuffer = new byte[ret];
-                        Array.Copy(buffer, 0, tmpBuffer, 0, ret);
-                        handler.SendPackage(new TcpPackage() { Buffer = tmpBuffer });
+                        bufferIndex += ret;
+                        //如果缓存满了，或者有0.01秒没有发送数据了
+                        if (bufferIndex >= buffer.Length - 1
+                            || (DateTime.Now - lastSendTime).TotalMilliseconds > 10)
+                        {
+                            flushBuffer();
+                            bufferIndex = 0;
+                            lastSendTime = DateTime.Now;
+                        }
                     }
                 }
             }

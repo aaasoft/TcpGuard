@@ -10,7 +10,9 @@ namespace TcpGuard.Core.Protocol.V1.Pkgs
     public class TcpPackage : AbstractPackage
     {
         public override byte PackageType => 11;
-
+        /// <summary>
+        /// 缓存数据
+        /// </summary>
         [ProtoMember(1)]
         public byte[] Buffer { get; set; }
     }
