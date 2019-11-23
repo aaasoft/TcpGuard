@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -18,6 +19,9 @@ namespace TcpGuardClient.Model
         /// Remote port
         /// </summary>
         public int RemotePort { get; set; }
+
+        [JsonIgnore]
+        public bool IsRuning { get; set; }
 
         public override bool Equals(object obj)
         {

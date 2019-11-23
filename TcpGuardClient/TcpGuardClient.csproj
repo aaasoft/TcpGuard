@@ -47,8 +47,8 @@
     <Reference Include="protobuf-net, Version=2.4.0.0, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
       <HintPath>..\packages\protobuf-net.2.4.0\lib\net40\protobuf-net.dll</HintPath>
     </Reference>
-    <Reference Include="Quick.Protocol, Version=1.2.11.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Quick.Protocol.1.2.11\lib\net45\Quick.Protocol.dll</HintPath>
+    <Reference Include="Quick.Protocol, Version=1.2.12.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Quick.Protocol.1.2.12\lib\net45\Quick.Protocol.dll</HintPath>
     </Reference>
     <Reference Include="Quick.Protocol.Tcp, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Quick.Protocol.Tcp.1.2.0\lib\net45\Quick.Protocol.Tcp.dll</HintPath>
@@ -116,6 +116,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -136,6 +137,15 @@
       <Project>{ea116b6c-97af-4ec0-9e2f-09111d1cdc87}</Project>
       <Name>TcpGuard.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_16p.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\remove_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sound_waves_16px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

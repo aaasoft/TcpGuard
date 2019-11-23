@@ -20,6 +20,7 @@ namespace TcpGuardClient.Model
             portalGun.Start();
             portalGunDict[portalModel] = portalGun;
             PortalList.Add(portalModel);
+            portalModel.IsRuning = true;
         }
 
         public void RemovePortal(PortalModel portalModel)
@@ -30,15 +31,24 @@ namespace TcpGuardClient.Model
             portalGun.Stop();
             portalGunDict.Remove(portalModel);
             PortalList.Remove(portalModel);
+            portalModel.IsRuning = false;
         }
 
         public void Init()
         {
             foreach (var portalModel in PortalList)
             {
-                var portalGun = new PortalGun(this, portalModel);
-                portalGun.Start();
-                portalGunDict[portalModel] = portalGun;
+                try
+                {
+                    var portalGun = new PortalGun(this, portalModel);
+                    portalGun.Start();
+                    portalGunDict[portalModel] = portalGun;
+                    portalModel.IsRuning = true;
+                }
+                catch
+                {
+                    portalModel.IsRuning = false;
+                }
             }
         }
     }

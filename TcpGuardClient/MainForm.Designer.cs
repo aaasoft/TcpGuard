@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.scMain = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lvServers = new System.Windows.Forms.ListView();
@@ -119,7 +118,7 @@
             // 
             // btnAddServer
             // 
-            this.btnAddServer.Image = ((System.Drawing.Image)(resources.GetObject("btnAddServer.Image")));
+            this.btnAddServer.Image = global::TcpGuardClient.Properties.Resources.add_16p;
             this.btnAddServer.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAddServer.Name = "btnAddServer";
             this.btnAddServer.Size = new System.Drawing.Size(52, 22);
@@ -129,7 +128,7 @@
             // btnDeleteServer
             // 
             this.btnDeleteServer.Enabled = false;
-            this.btnDeleteServer.Image = ((System.Drawing.Image)(resources.GetObject("btnDeleteServer.Image")));
+            this.btnDeleteServer.Image = global::TcpGuardClient.Properties.Resources.remove_16px;
             this.btnDeleteServer.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDeleteServer.Name = "btnDeleteServer";
             this.btnDeleteServer.Size = new System.Drawing.Size(65, 22);
@@ -139,7 +138,7 @@
             // btnTest
             // 
             this.btnTest.Enabled = false;
-            this.btnTest.Image = ((System.Drawing.Image)(resources.GetObject("btnTest.Image")));
+            this.btnTest.Image = global::TcpGuardClient.Properties.Resources.sound_waves_16px;
             this.btnTest.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnTest.Name = "btnTest";
             this.btnTest.Size = new System.Drawing.Size(52, 22);
@@ -204,7 +203,7 @@
             // 
             // btnAddPortal
             // 
-            this.btnAddPortal.Image = ((System.Drawing.Image)(resources.GetObject("btnAddPortal.Image")));
+            this.btnAddPortal.Image = global::TcpGuardClient.Properties.Resources.add_16p;
             this.btnAddPortal.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAddPortal.Name = "btnAddPortal";
             this.btnAddPortal.Size = new System.Drawing.Size(52, 22);
@@ -214,7 +213,7 @@
             // btnDeletePortals
             // 
             this.btnDeletePortals.Enabled = false;
-            this.btnDeletePortals.Image = ((System.Drawing.Image)(resources.GetObject("btnDeletePortals.Image")));
+            this.btnDeletePortals.Image = global::TcpGuardClient.Properties.Resources.remove_16px;
             this.btnDeletePortals.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDeletePortals.Name = "btnDeletePortals";
             this.btnDeletePortals.Size = new System.Drawing.Size(65, 22);

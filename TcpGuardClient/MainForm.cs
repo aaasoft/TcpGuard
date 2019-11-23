@@ -109,13 +109,20 @@ namespace TcpGuardClient
 
         private void btnAddPortal_Click(object sender, EventArgs e)
         {
-            var form = new AddPortalForm();
-            var ret = form.ShowDialog();
-            if (ret != DialogResult.OK)
-                return;
-            currentServer.AddPortal(form.Model);
-            addPortalToListView(form.Model);
-            Config.Save();
+            try
+            {
+                var form = new AddPortalForm();
+                var ret = form.ShowDialog();
+                if (ret != DialogResult.OK)
+                    return;
+                currentServer.AddPortal(form.Model);
+                addPortalToListView(form.Model);
+                Config.Save();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Add portal error,reason:" + ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void btnDeletePortals_Click(object sender, EventArgs e)

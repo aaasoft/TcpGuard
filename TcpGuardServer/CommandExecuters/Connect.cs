@@ -28,6 +28,8 @@ namespace TcpGuardServer.CommandExecuters
                 portal.Stoped += (sender, e) =>
                   {
                       tcpClient.Close();
+                      var channel = handler as QpServerChannel;
+                      channel?.Stop();
                   };
                 portal.Start();
                 await handler.SendCommandResponse(cmd, 0, null);
