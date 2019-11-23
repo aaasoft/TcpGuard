@@ -89,17 +89,16 @@ namespace TcpGuard.Core
                         continue;
                     }
                     var ret = stream.ReadAsync(buffer, bufferIndex, freeBufferLength, token).Result;
-                    if (ret > 0)
+                    if (ret <= 0)
+                        continue;
+                    bufferIndex += ret;
+                    //如果缓存满了，或者有0.01秒没有发送数据了
+                    if (bufferIndex >= buffer.Length - 1
+                        || (DateTime.Now - lastSendTime).TotalMilliseconds > 10)
                     {
-                        bufferIndex += ret;
-                        //如果缓存满了，或者有0.01秒没有发送数据了
-                        if (bufferIndex >= buffer.Length - 1
-                            || (DateTime.Now - lastSendTime).TotalMilliseconds > 10)
-                        {
-                            flushBuffer();
-                            bufferIndex = 0;
-                            lastSendTime = DateTime.Now;
-                        }
+                        flushBuffer();
+                        bufferIndex = 0;
+                        lastSendTime = DateTime.Now;
                     }
                 }
             }

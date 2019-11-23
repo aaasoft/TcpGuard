@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.scMain = new System.Windows.Forms.SplitContainer();
             this.gpServers = new System.Windows.Forms.GroupBox();
@@ -46,8 +47,9 @@
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnAddPortal = new System.Windows.Forms.ToolStripButton();
-            this.btnDeletePortals = new System.Windows.Forms.ToolStripButton();
             this.btnEditPortal = new System.Windows.Forms.ToolStripButton();
+            this.btnDeletePortals = new System.Windows.Forms.ToolStripButton();
+            this.niMain = new System.Windows.Forms.NotifyIcon(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.scMain)).BeginInit();
             this.scMain.Panel1.SuspendLayout();
             this.scMain.Panel2.SuspendLayout();
@@ -232,6 +234,16 @@
             this.btnAddPortal.Text = "Add";
             this.btnAddPortal.Click += new System.EventHandler(this.btnAddPortal_Click);
             // 
+            // btnEditPortal
+            // 
+            this.btnEditPortal.Enabled = false;
+            this.btnEditPortal.Image = global::TcpGuardClient.Properties.Resources.adjustment_16px;
+            this.btnEditPortal.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEditPortal.Name = "btnEditPortal";
+            this.btnEditPortal.Size = new System.Drawing.Size(50, 22);
+            this.btnEditPortal.Text = "Edit";
+            this.btnEditPortal.Click += new System.EventHandler(this.btnEditPortal_Click);
+            // 
             // btnDeletePortals
             // 
             this.btnDeletePortals.Enabled = false;
@@ -242,15 +254,12 @@
             this.btnDeletePortals.Text = "Delete";
             this.btnDeletePortals.Click += new System.EventHandler(this.btnDeletePortals_Click);
             // 
-            // btnEditPortal
+            // niMain
             // 
-            this.btnEditPortal.Enabled = false;
-            this.btnEditPortal.Image = global::TcpGuardClient.Properties.Resources.adjustment_16px;
-            this.btnEditPortal.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnEditPortal.Name = "btnEditPortal";
-            this.btnEditPortal.Size = new System.Drawing.Size(50, 22);
-            this.btnEditPortal.Text = "Edit";
-            this.btnEditPortal.Click += new System.EventHandler(this.btnEditPortal_Click);
+            this.niMain.Icon = ((System.Drawing.Icon)(resources.GetObject("niMain.Icon")));
+            this.niMain.Text = "TcpGuard Client";
+            this.niMain.Visible = true;
+            this.niMain.MouseClick += new System.Windows.Forms.MouseEventHandler(this.niMain_MouseClick);
             // 
             // MainForm
             // 
@@ -262,6 +271,7 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TcpGuard Client";
+            this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
             this.scMain.Panel1.ResumeLayout(false);
             this.scMain.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scMain)).EndInit();
@@ -299,6 +309,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ToolStripButton btnEditServer;
         private System.Windows.Forms.ToolStripButton btnEditPortal;
+        private System.Windows.Forms.NotifyIcon niMain;
     }
 }
 

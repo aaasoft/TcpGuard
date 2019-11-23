@@ -235,5 +235,25 @@ namespace TcpGuardClient
             }
             closeLoading();
         }
+
+        private void MainForm_SizeChanged(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                this.ShowInTaskbar = false;
+                niMain.ShowBalloonTip(1000, Application.ProductName, "I'm here.", ToolTipIcon.Info);
+            }
+        }
+
+        private void niMain_MouseClick(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left)
+            {
+                this.ShowInTaskbar = true;
+                this.WindowState = FormWindowState.Normal;
+                this.Show();
+                this.Activate();
+            }
+        }
     }
 }
