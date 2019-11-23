@@ -46,6 +46,13 @@ namespace TcpGuardClient
             }
         }
 
+        private void refreshPortalListView()
+        {
+            lvPortals.Items.Clear();
+            foreach (var portal in currentServer.PortalList)
+                addPortalToListView(portal);
+        }
+
         private void showLoading(string text)
         {
             scMain.Visible = false;
@@ -103,6 +110,7 @@ namespace TcpGuardClient
             model.Uninit();
             model.Init();
             refreshServerListView();
+            Config.Save();
         }
 
         private void btnDeleteServer_Click(object sender, EventArgs e)
@@ -129,10 +137,7 @@ namespace TcpGuardClient
                 return;
             var lvi = lvServers.SelectedItems[0];
             currentServer = (Model.ServerModel)lvi.Tag;
-            lvPortals.Items.Clear();
-
-            foreach (var portal in currentServer.PortalList)
-                addPortalToListView(portal);
+            refreshPortalListView();
         }
 
         private void btnAddPortal_Click(object sender, EventArgs e)
@@ -153,6 +158,24 @@ namespace TcpGuardClient
             }
         }
 
+        private void btnEditPortal_Click(object sender, EventArgs e)
+        {
+            if (lvPortals.SelectedItems.Count <= 0)
+                return;
+            var lvi = lvPortals.SelectedItems[0];
+            var model = (Model.PortalModel)lvi.Tag;
+
+            var form = new AddPortalForm();
+            form.Model = model;
+            var ret = form.ShowDialog();
+            if (ret != DialogResult.OK)
+                return;
+            currentServer.RemovePortal(model);
+            currentServer.AddPortal(model);
+            Config.Save();
+            refreshPortalListView();
+        }
+
         private void btnDeletePortals_Click(object sender, EventArgs e)
         {
             if (lvPortals.SelectedItems.Count <= 0)
@@ -170,7 +193,7 @@ namespace TcpGuardClient
 
         private void lvPortals_SelectedIndexChanged(object sender, EventArgs e)
         {
-            btnDeletePortals.Enabled = lvPortals.SelectedItems.Count > 0;
+            btnEditPortal.Enabled = btnDeletePortals.Enabled = lvPortals.SelectedItems.Count > 0;
         }
 
         private void lvServers_MouseDoubleClick(object sender, MouseEventArgs e)

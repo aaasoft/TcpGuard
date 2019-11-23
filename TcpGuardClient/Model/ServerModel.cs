@@ -27,13 +27,15 @@ namespace TcpGuardClient.Model
 
         public void RemovePortal(PortalModel portalModel)
         {
+            if (PortalList.Contains(portalModel))
+                PortalList.Remove(portalModel);
+            portalModel.IsRuning = false;
+
             if (!portalGunDict.ContainsKey(portalModel))
                 return;
             var portalGun = portalGunDict[portalModel];
             portalGun.Stop();
             portalGunDict.Remove(portalModel);
-            PortalList.Remove(portalModel);
-            portalModel.IsRuning = false;
         }
 
         public void Uninit()

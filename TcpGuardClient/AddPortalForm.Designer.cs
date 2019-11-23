@@ -35,6 +35,7 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.nudLocalPort = new System.Windows.Forms.NumericUpDown();
+            this.btnCancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudRemotePort)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLocalPort)).BeginInit();
             this.SuspendLayout();
@@ -93,7 +94,7 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(200, 93);
+            this.btnSave.Location = new System.Drawing.Point(119, 93);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 100;
@@ -134,11 +135,26 @@
             0,
             0});
             // 
+            // btnCancel
+            // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Location = new System.Drawing.Point(200, 93);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 101;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
             // AddPortalForm
             // 
+            this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(317, 133);
+            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.nudLocalPort);
             this.Controls.Add(this.label3);
@@ -150,6 +166,7 @@
             this.Name = "AddPortalForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Add Portal";
+            this.Load += new System.EventHandler(this.AddPortalForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudRemotePort)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLocalPort)).EndInit();
             this.ResumeLayout(false);
@@ -166,5 +183,6 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown nudLocalPort;
+        private System.Windows.Forms.Button btnCancel;
     }
 }
