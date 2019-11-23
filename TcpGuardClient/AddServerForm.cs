@@ -25,7 +25,9 @@ namespace TcpGuardClient
             {
                 Host = txtHost.Text.Trim(),
                 Port = Convert.ToInt32(nudPort.Value),
-                Password = txtPassword.Text.Trim()
+                Password = txtPassword.Text.Trim(),
+                EnableCompress = cbEnableCompress.Checked,
+                EnableEncrypt = cbEnableEncrypt.Checked
             };
             this.DialogResult = DialogResult.OK;
             this.Close();

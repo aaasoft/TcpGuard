@@ -35,6 +35,8 @@
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.nudPort = new System.Windows.Forms.NumericUpDown();
             this.btnSave = new System.Windows.Forms.Button();
+            this.cbEnableCompress = new System.Windows.Forms.CheckBox();
+            this.cbEnableEncrypt = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudPort)).BeginInit();
             this.SuspendLayout();
             // 
@@ -111,7 +113,7 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(200, 93);
+            this.btnSave.Location = new System.Drawing.Point(200, 143);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 100;
@@ -119,11 +121,33 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // cbEnableCompress
+            // 
+            this.cbEnableCompress.AutoSize = true;
+            this.cbEnableCompress.Location = new System.Drawing.Point(101, 93);
+            this.cbEnableCompress.Name = "cbEnableCompress";
+            this.cbEnableCompress.Size = new System.Drawing.Size(72, 16);
+            this.cbEnableCompress.TabIndex = 101;
+            this.cbEnableCompress.Text = "启用压缩";
+            this.cbEnableCompress.UseVisualStyleBackColor = true;
+            // 
+            // cbEnableEncrypt
+            // 
+            this.cbEnableEncrypt.AutoSize = true;
+            this.cbEnableEncrypt.Location = new System.Drawing.Point(101, 115);
+            this.cbEnableEncrypt.Name = "cbEnableEncrypt";
+            this.cbEnableEncrypt.Size = new System.Drawing.Size(72, 16);
+            this.cbEnableEncrypt.TabIndex = 101;
+            this.cbEnableEncrypt.Text = "启用加密";
+            this.cbEnableEncrypt.UseVisualStyleBackColor = true;
+            // 
             // AddServerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(317, 133);
+            this.ClientSize = new System.Drawing.Size(317, 181);
+            this.Controls.Add(this.cbEnableEncrypt);
+            this.Controls.Add(this.cbEnableCompress);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.nudPort);
             this.Controls.Add(this.txtPassword);
@@ -150,5 +174,7 @@
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.NumericUpDown nudPort;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.CheckBox cbEnableCompress;
+        private System.Windows.Forms.CheckBox cbEnableEncrypt;
     }
 }

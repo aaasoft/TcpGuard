@@ -42,8 +42,8 @@ namespace TcpGuardClient
                     Host = serverModel.Host,
                     Port = serverModel.Port,
                     Password = serverModel.Password,
-                    EnableCompress = false,
-                    EnableEncrypt = false,
+                    EnableCompress = serverModel.EnableCompress,
+                    EnableEncrypt = serverModel.EnableEncrypt,
                     InstructionSet = new[] { TcpGuard.Core.Protocol.V1.Instruction.Instance }
                 });
                 qpClient.Disconnected += (sender, e) =>

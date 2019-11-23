@@ -59,7 +59,15 @@ namespace TcpGuard.Core
                 return;
             try
             {
-                var ret = await stream.ReadAsync(buffer, 0, buffer.Length, token);
+                int ret = 0;
+                //重试3次
+                for (var i = 0; i < 3; i++)
+                {
+                    ret = await stream.ReadAsync(buffer, 0, buffer.Length, token);
+                    if (ret > 0)
+                        break;
+                    Thread.Sleep(1000);
+                }
                 if (ret <= 0)
                 {
                     Stop();
