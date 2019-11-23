@@ -9,7 +9,7 @@ Server: .NET Core 2.1
 
 Client: .NET Framework 4.5
 
-## Screenshots=
+## Screenshots
 
 ![alt tag](https://github.com/aaasoft/TcpGuard/raw/master/Screenshots/1.png)
 
