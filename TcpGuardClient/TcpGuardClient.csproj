@@ -153,5 +153,8 @@
   <ItemGroup>
     <None Include="Resources\logo.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\adjustment_16px.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

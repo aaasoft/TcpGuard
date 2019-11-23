@@ -37,6 +37,7 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.cbEnableCompress = new System.Windows.Forms.CheckBox();
             this.cbEnableEncrypt = new System.Windows.Forms.CheckBox();
+            this.btnCancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudPort)).BeginInit();
             this.SuspendLayout();
             // 
@@ -113,7 +114,7 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(200, 143);
+            this.btnSave.Location = new System.Drawing.Point(119, 146);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 100;
@@ -141,13 +142,27 @@
             this.cbEnableEncrypt.Text = "启用加密";
             this.cbEnableEncrypt.UseVisualStyleBackColor = true;
             // 
+            // btnCancel
+            // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.Location = new System.Drawing.Point(200, 146);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 100;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
             // AddServerForm
             // 
+            this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(317, 181);
             this.Controls.Add(this.cbEnableEncrypt);
             this.Controls.Add(this.cbEnableCompress);
+            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.nudPort);
             this.Controls.Add(this.txtPassword);
@@ -159,6 +174,7 @@
             this.Name = "AddServerForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Add Server";
+            this.Load += new System.EventHandler(this.AddServerForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudPort)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -176,5 +192,6 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.CheckBox cbEnableCompress;
         private System.Windows.Forms.CheckBox cbEnableEncrypt;
+        private System.Windows.Forms.Button btnCancel;
     }
 }

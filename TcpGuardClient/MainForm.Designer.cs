@@ -46,6 +46,7 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnAddPortal = new System.Windows.Forms.ToolStripButton();
             this.btnDeletePortals = new System.Windows.Forms.ToolStripButton();
+            this.btnEditServer = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.scMain)).BeginInit();
             this.scMain.Panel1.SuspendLayout();
             this.scMain.Panel2.SuspendLayout();
@@ -110,6 +111,7 @@
             // 
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnAddServer,
+            this.btnEditServer,
             this.btnDeleteServer,
             this.btnTest});
             this.toolStrip2.Location = new System.Drawing.Point(3, 17);
@@ -228,6 +230,16 @@
             this.btnDeletePortals.Text = "Delete";
             this.btnDeletePortals.Click += new System.EventHandler(this.btnDeletePortals_Click);
             // 
+            // btnEditServer
+            // 
+            this.btnEditServer.Enabled = false;
+            this.btnEditServer.Image = global::TcpGuardClient.Properties.Resources.adjustment_16px;
+            this.btnEditServer.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEditServer.Name = "btnEditServer";
+            this.btnEditServer.Size = new System.Drawing.Size(50, 22);
+            this.btnEditServer.Text = "Edit";
+            this.btnEditServer.Click += new System.EventHandler(this.btnEditServer_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -273,6 +285,7 @@
         private System.Windows.Forms.ToolStripButton btnDeletePortals;
         private System.Windows.Forms.ToolStripButton btnTest;
         private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ToolStripButton btnEditServer;
     }
 }
 

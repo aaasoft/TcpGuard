@@ -36,6 +36,19 @@ namespace TcpGuardClient.Model
             portalModel.IsRuning = false;
         }
 
+        public void Uninit()
+        {
+            foreach (var portalModel in PortalList)
+            {
+                if (!portalGunDict.ContainsKey(portalModel))
+                    return;
+                var portalGun = portalGunDict[portalModel];
+                portalGun.Stop();
+                portalGunDict.Remove(portalModel);
+                portalModel.IsRuning = false;
+            }
+        }
+
         public void Init()
         {
             foreach (var portalModel in PortalList)

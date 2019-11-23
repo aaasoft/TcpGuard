@@ -37,6 +37,15 @@ namespace TcpGuardClient
             }
         }
 
+        private void refreshServerListView()
+        {
+            lvServers.Items.Clear();
+            foreach (var server in Config.ServerList)
+            {
+                addServerToListView(server);
+            }
+        }
+
         private void showLoading(string text)
         {
             scMain.Visible = false;
@@ -79,6 +88,23 @@ namespace TcpGuardClient
             Config.Save();
         }
 
+        private void btnEditServer_Click(object sender, EventArgs e)
+        {
+            if (lvServers.SelectedItems.Count <= 0)
+                return;
+            var lvi = lvServers.SelectedItems[0];
+            var model = (Model.ServerModel)lvi.Tag;
+
+            var form = new AddServerForm();
+            form.Model = model;
+            var ret = form.ShowDialog();
+            if (ret != DialogResult.OK)
+                return;
+            model.Uninit();
+            model.Init();
+            refreshServerListView();
+        }
+
         private void btnDeleteServer_Click(object sender, EventArgs e)
         {
             if (lvServers.SelectedItems.Count <= 0)
@@ -89,8 +115,7 @@ namespace TcpGuardClient
             if (ret == DialogResult.Cancel)
                 return;
 
-            foreach (var portal in model.PortalList)
-                model.RemovePortal(portal);
+            model.Uninit();
 
             lvServers.Items.Remove(lvi);
             Config.ServerList.Remove(model);
@@ -99,7 +124,7 @@ namespace TcpGuardClient
 
         private void lvServers_SelectedIndexChanged(object sender, EventArgs e)
         {
-            gbPortals.Visible = btnTest.Enabled = btnDeleteServer.Enabled = lvServers.SelectedItems.Count > 0;
+            gbPortals.Visible = btnEditServer.Enabled = btnTest.Enabled = btnDeleteServer.Enabled = lvServers.SelectedItems.Count > 0;
             if (lvServers.SelectedItems.Count <= 0)
                 return;
             var lvi = lvServers.SelectedItems[0];
