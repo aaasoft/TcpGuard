@@ -28,19 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.scMain = new System.Windows.Forms.SplitContainer();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gpServers = new System.Windows.Forms.GroupBox();
             this.lvServers = new System.Windows.Forms.ListView();
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.btnAddServer = new System.Windows.Forms.ToolStripButton();
             this.btnDeleteServer = new System.Windows.Forms.ToolStripButton();
             this.btnTest = new System.Windows.Forms.ToolStripButton();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.gbPortals = new System.Windows.Forms.GroupBox();
             this.lvPortals = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnAddPortal = new System.Windows.Forms.ToolStripButton();
             this.btnDeletePortals = new System.Windows.Forms.ToolStripButton();
@@ -48,9 +50,9 @@
             this.scMain.Panel1.SuspendLayout();
             this.scMain.Panel2.SuspendLayout();
             this.scMain.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.gpServers.SuspendLayout();
             this.toolStrip2.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.gbPortals.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,26 +64,26 @@
             // 
             // scMain.Panel1
             // 
-            this.scMain.Panel1.Controls.Add(this.groupBox1);
+            this.scMain.Panel1.Controls.Add(this.gpServers);
             // 
             // scMain.Panel2
             // 
-            this.scMain.Panel2.Controls.Add(this.groupBox2);
+            this.scMain.Panel2.Controls.Add(this.gbPortals);
             this.scMain.Size = new System.Drawing.Size(784, 561);
             this.scMain.SplitterDistance = 261;
             this.scMain.TabIndex = 1;
             // 
-            // groupBox1
+            // gpServers
             // 
-            this.groupBox1.Controls.Add(this.lvServers);
-            this.groupBox1.Controls.Add(this.toolStrip2);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(0, 0);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(261, 561);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Servers";
+            this.gpServers.Controls.Add(this.lvServers);
+            this.gpServers.Controls.Add(this.toolStrip2);
+            this.gpServers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gpServers.Location = new System.Drawing.Point(0, 0);
+            this.gpServers.Name = "gpServers";
+            this.gpServers.Size = new System.Drawing.Size(261, 561);
+            this.gpServers.TabIndex = 2;
+            this.gpServers.TabStop = false;
+            this.gpServers.Text = "Servers";
             // 
             // lvServers
             // 
@@ -145,24 +147,26 @@
             this.btnTest.Text = "Test";
             this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
             // 
-            // groupBox2
+            // gbPortals
             // 
-            this.groupBox2.Controls.Add(this.lvPortals);
-            this.groupBox2.Controls.Add(this.toolStrip1);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(0, 0);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(519, 561);
-            this.groupBox2.TabIndex = 3;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Portals";
+            this.gbPortals.Controls.Add(this.lvPortals);
+            this.gbPortals.Controls.Add(this.toolStrip1);
+            this.gbPortals.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gbPortals.Location = new System.Drawing.Point(0, 0);
+            this.gbPortals.Name = "gbPortals";
+            this.gbPortals.Size = new System.Drawing.Size(519, 561);
+            this.gbPortals.TabIndex = 3;
+            this.gbPortals.TabStop = false;
+            this.gbPortals.Text = "Portals";
+            this.gbPortals.Visible = false;
             // 
             // lvPortals
             // 
             this.lvPortals.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
-            this.columnHeader3});
+            this.columnHeader3,
+            this.columnHeader5});
             this.lvPortals.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvPortals.FullRowSelect = true;
             this.lvPortals.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
@@ -178,7 +182,7 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "Remote Host";
-            this.columnHeader1.Width = 240;
+            this.columnHeader1.Width = 200;
             // 
             // columnHeader2
             // 
@@ -189,6 +193,10 @@
             // 
             this.columnHeader3.Text = "Local Port";
             this.columnHeader3.Width = 120;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Runing";
             // 
             // toolStrip1
             // 
@@ -226,6 +234,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.scMain);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TcpGuard Client";
@@ -233,12 +242,12 @@
             this.scMain.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scMain)).EndInit();
             this.scMain.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.gpServers.ResumeLayout(false);
+            this.gpServers.PerformLayout();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.gbPortals.ResumeLayout(false);
+            this.gbPortals.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -248,13 +257,13 @@
         #endregion
 
         private System.Windows.Forms.SplitContainer scMain;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gpServers;
         private System.Windows.Forms.ListView lvServers;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton btnAddServer;
         private System.Windows.Forms.ToolStripButton btnDeleteServer;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox gbPortals;
         private System.Windows.Forms.ListView lvPortals;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
@@ -263,6 +272,7 @@
         private System.Windows.Forms.ToolStripButton btnAddPortal;
         private System.Windows.Forms.ToolStripButton btnDeletePortals;
         private System.Windows.Forms.ToolStripButton btnTest;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
     }
 }
 

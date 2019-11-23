@@ -1,6 +1,7 @@
 ﻿using Quick.Protocol.Core;
 using System;
 using System.IO;
+using System.Net.Sockets;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,19 +12,20 @@ namespace TcpGuard.Core
     public class Portal
     {
         private QpCommandHandler handler;
-        private Stream stream;
+        private TcpClient tcpClient;
+        private NetworkStream stream;
         private byte[] buffer;
         private CancellationTokenSource cts;
 
         public event EventHandler Stoped;
 
-        public Portal(QpCommandHandler handler, Stream stream) : this(handler, stream, 1 * 1024) { }
+        public Portal(QpCommandHandler handler, TcpClient tcpClient) : this(handler, tcpClient, 1 * 1024) { }
 
-        public Portal(QpCommandHandler handler, Stream stream, int bufferSize)
+        public Portal(QpCommandHandler handler, TcpClient tcpClient, int bufferSize)
         {
             this.handler = handler;
-            this.stream = stream;
-
+            this.tcpClient = tcpClient;
+            this.stream = tcpClient.GetStream();
             buffer = new byte[bufferSize];
         }
 
@@ -33,7 +35,7 @@ namespace TcpGuard.Core
             cts = new CancellationTokenSource();
 
             handler.PackageReceived += Handler_PackageReceived;
-            _ = beginReadStream(cts.Token);
+            beginReadStream(cts.Token);
         }
 
         private void Handler_PackageReceived(object sender, Quick.Protocol.Packages.IPackage e)
@@ -41,42 +43,36 @@ namespace TcpGuard.Core
             if (e is TcpPackage)
             {
                 var package = (TcpPackage)e;
-                try
-                {
-                    stream.Write(package.Buffer, 0, package.Buffer.Length);
-                    stream.Flush();
-                }
-                catch
-                {
-                    Stop();
-                }
+                stream.WriteAsync(package.Buffer, 0, package.Buffer.Length);
             }
         }
 
-        private async Task beginReadStream(CancellationToken token)
+        private Task beginReadStream(CancellationToken token)
         {
-            if (token.IsCancellationRequested)
-                return;
+            return Task.Run(() => readStream(token));
+        }
+
+        private void readStream(CancellationToken token)
+        {
             try
             {
-                int ret = 0;
-                //重试3次
-                for (var i = 0; i < 3; i++)
+                while (true)
                 {
-                    ret = await stream.ReadAsync(buffer, 0, buffer.Length, token);
+                    if (token.IsCancellationRequested)
+                        throw new TaskCanceledException();
+                    if (!stream.DataAvailable)
+                    {
+                        Thread.Sleep(10);
+                        continue;
+                    }
+                    var ret = stream.Read(buffer, 0, buffer.Length);
                     if (ret > 0)
-                        break;
-                    Thread.Sleep(1000);
+                    {
+                        var tmpBuffer = new byte[ret];
+                        Array.Copy(buffer, 0, tmpBuffer, 0, ret);
+                        handler.SendPackage(new TcpPackage() { Buffer = tmpBuffer });
+                    }
                 }
-                if (ret <= 0)
-                {
-                    Stop();
-                    return;
-                }
-                var tmpBuffer = new byte[ret];
-                Array.Copy(buffer, 0, tmpBuffer, 0, ret);
-                await handler.SendPackage(new TcpPackage() { Buffer = tmpBuffer });
-                _ = beginReadStream(token);
             }
             catch
             {
@@ -89,8 +85,8 @@ namespace TcpGuard.Core
             cts?.Cancel();
             cts = null;
 
-            try { stream.Close(); }
-            catch { }
+            try { stream.Close(); } catch { }
+            try { tcpClient.Close(); } catch { }
             Stoped?.Invoke(this, EventArgs.Empty);
         }
     }

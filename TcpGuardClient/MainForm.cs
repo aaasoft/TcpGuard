@@ -55,6 +55,7 @@ namespace TcpGuardClient
             var lvi = new ListViewItem(model.RemoteHost);
             lvi.SubItems.Add(model.RemotePort.ToString());
             lvi.SubItems.Add(model.Port.ToString());
+            lvi.SubItems.Add(model.IsRuning.ToString());
             lvi.Tag = model;
             lvPortals.Items.Add(lvi);
         }
@@ -88,6 +89,9 @@ namespace TcpGuardClient
             if (ret == DialogResult.Cancel)
                 return;
 
+            foreach (var portal in model.PortalList)
+                model.RemovePortal(portal);
+
             lvServers.Items.Remove(lvi);
             Config.ServerList.Remove(model);
             Config.Save();
@@ -95,8 +99,7 @@ namespace TcpGuardClient
 
         private void lvServers_SelectedIndexChanged(object sender, EventArgs e)
         {
-            btnTest.Enabled = btnDeleteServer.Enabled = lvServers.SelectedItems.Count > 0;
-
+            gbPortals.Visible = btnTest.Enabled = btnDeleteServer.Enabled = lvServers.SelectedItems.Count > 0;
             if (lvServers.SelectedItems.Count <= 0)
                 return;
             var lvi = lvServers.SelectedItems[0];

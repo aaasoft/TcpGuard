@@ -19,6 +19,8 @@ namespace TcpGuardClient
         private ServerModel serverModel;
         private PortalModel portalModel;
         private TcpListener listener;
+        private Dictionary<PortalModel, Portal> portalDict = new Dictionary<PortalModel, Portal>();
+
         public PortalGun(ServerModel serverModel, PortalModel portalModel)
         {
             this.serverModel = serverModel;
@@ -61,24 +63,32 @@ namespace TcpGuardClient
                     qpClient.Close();
                     throw new ApplicationException(rep.Message);
                 }
-                var portal = new Portal(qpClient, tcpClient.GetStream());
+                var portal = new Portal(qpClient, tcpClient);
                 portal.Stoped += (sender, e) =>
                 {
                     try { qpClient.Close(); } catch { }
                     try { tcpClient.Close(); } catch { }
                 };
                 portal.Start();
+                lock (portalDict)
+                    portalDict[portalModel] = portal;
                 _ = beginAcceptTcpClient();
             }
             catch
             {
                 try { tcpClient.Close(); } catch { }
+                lock (portalDict)
+                    if (portalDict.ContainsKey(portalModel))
+                        portalDict.Remove(portalModel);
             }
         }
 
         public void Stop()
         {
             listener.Stop();
+            lock (portalDict)
+                foreach (var portal in portalDict.Values)
+                    portal.Stop();
         }
     }
 }
