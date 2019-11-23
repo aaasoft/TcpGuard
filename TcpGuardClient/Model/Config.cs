@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using TcpGuard.Core.Protocol.V1.Model;
 
 namespace TcpGuardClient.Model
 {
@@ -12,7 +11,6 @@ namespace TcpGuardClient.Model
 
         private static string configFilePath = typeof(Config).FullName + ".json";
 
-        public List<PortalModel> PortalList { get; set; } = new List<PortalModel>();
         public List<ServerModel> ServerList { get; set; } = new List<ServerModel>();
 
         public void Save()

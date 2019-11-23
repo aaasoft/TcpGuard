@@ -1,57 +1,74 @@
-﻿using System;
+﻿using Quick.Protocol.Core;
+using System;
 using System.IO;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using TcpGuard.Core.Protocol.V1.Pkgs;
 
 namespace TcpGuard.Core
 {
     public class Portal
     {
-        private Stream streamA, streamB;
-        private byte[] streamA_Buffer, streamB_Buffer;
+        private QpCommandHandler handler;
+        private Stream stream;
+        private byte[] buffer;
         private CancellationTokenSource cts;
 
         public event EventHandler Stoped;
 
-        public Portal(Stream streamA, Stream streamB) : this(streamA, streamB, 1 * 1024) { }
+        public Portal(QpCommandHandler handler, Stream stream) : this(handler, stream, 1 * 1024) { }
 
-        public Portal(Stream streamA, Stream streamB, int bufferSize)
+        public Portal(QpCommandHandler handler, Stream stream, int bufferSize)
         {
-            this.streamA = streamA;
-            this.streamB = streamB;
+            this.handler = handler;
+            this.stream = stream;
 
-            streamA_Buffer = new byte[bufferSize];
-            streamB_Buffer = new byte[bufferSize];
+            buffer = new byte[bufferSize];
         }
 
         public void Start()
         {
             cts?.Cancel();
             cts = new CancellationTokenSource();
-            _ = beginReadStream(streamA, streamA_Buffer, streamB, cts.Token);
-            _ = beginReadStream(streamB, streamB_Buffer, streamA, cts.Token);
+
+            handler.PackageReceived += Handler_PackageReceived;
+            _ = beginReadStream(cts.Token);
         }
 
-        private async Task beginReadStream(Stream streamA, byte[] buffer, Stream streamB, CancellationToken token)
+        private void Handler_PackageReceived(object sender, Quick.Protocol.Packages.IPackage e)
         {
+            if (e is TcpPackage)
+            {
+                var package = (TcpPackage)e;
+                try
+                {
+                    stream.Write(package.Buffer, 0, package.Buffer.Length);
+                    stream.Flush();
+                }
+                catch
+                {
+                    Stop();
+                }
+            }
+        }
+
+        private async Task beginReadStream(CancellationToken token)
+        {
+            if (token.IsCancellationRequested)
+                return;
             try
             {
-                var ret = await streamA.ReadAsync(buffer, 0, buffer.Length);
+                var ret = await stream.ReadAsync(buffer, 0, buffer.Length, token);
                 if (ret <= 0)
                 {
                     Stop();
                     return;
                 }
-                for (var i = 0; i < ret / 2; i++)
-                {
-                    var a = buffer[i];
-                    buffer[i] = buffer[ret - 1 - i];
-                    buffer[ret - 1 - i] = a;
-                }
-                await streamB.WriteAsync(buffer, 0, ret);
-                await streamB.FlushAsync();
-                _ = beginReadStream(streamA, buffer, streamB, token);
+                var tmpBuffer = new byte[ret];
+                Array.Copy(buffer, 0, tmpBuffer, 0, ret);
+                await handler.SendPackage(new TcpPackage() { Buffer = tmpBuffer });
+                _ = beginReadStream(token);
             }
             catch
             {
@@ -64,11 +81,8 @@ namespace TcpGuard.Core
             cts?.Cancel();
             cts = null;
 
-            try { streamA.Close(); }
+            try { stream.Close(); }
             catch { }
-            try { streamB.Close(); }
-            catch { }
-
             Stoped?.Invoke(this, EventArgs.Empty);
         }
     }

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using TcpGuard.Core.Protocol.V1.Model;
+using TcpGuardClient.Model;
 
 namespace TcpGuardClient
 {

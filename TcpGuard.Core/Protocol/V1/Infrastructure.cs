@@ -11,12 +11,14 @@ namespace TcpGuard.Core.Protocol.V1
         {
             Id = typeof(Instruction).Namespace,
             Name = "TcpGuard Protocol V1",
+            SupportPackages = new Quick.Protocol.Packages.IPackage[]
+            {
+                new Pkgs.TcpPackage()
+            },
             SupportCommands = new Quick.Protocol.Commands.ICommand[]
-                    {
-                        new Commands.AddPortalCommand(),
-                        new Commands.DeletePortalCommand(),
-                        new Commands.QueryPortalCommand()
-                    }
+            {
+                new Commands.ConnectCommand()
+            }
         };
     }
 }
