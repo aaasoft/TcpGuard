@@ -39,7 +39,9 @@ namespace TcpGuard.Core
         {
             cts?.Cancel();
             cts = new CancellationTokenSource();
-            beginSendPackage(cts.Token);
+            //大于等于10毫秒时，才批量发送
+            if (packageSendInterval >= 10)
+                beginSendPackage(cts.Token);
             handler.PackageReceived += Handler_PackageReceived;
             stream.CopyToAsync(this).ContinueWith(t => Stop());
         }
@@ -106,6 +108,8 @@ namespace TcpGuard.Core
             var sleepTime = 0;
             while (true)
             {
+                if (cts.IsCancellationRequested)
+                    return;
                 if (sleepTime > 0)
                     Thread.Sleep(sleepTime);
 
@@ -114,7 +118,7 @@ namespace TcpGuard.Core
                     var bufferLeftCount = send_buffer.Length - send_buffer_index;
                     if (count > bufferLeftCount)
                     {
-                        sleepTime = 10;
+                        sleepTime = 100;
                         continue;
                     }
                     Array.Copy(buffer, offset, send_buffer, send_buffer_index, count);
