@@ -163,6 +163,11 @@
             this.nudSendInterval.Name = "nudSendInterval";
             this.nudSendInterval.Size = new System.Drawing.Size(174, 21);
             this.nudSendInterval.TabIndex = 4;
+            this.nudSendInterval.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
             // 
             // label4
             // 
