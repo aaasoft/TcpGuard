@@ -17,6 +17,7 @@ namespace TcpGuard.Core.Protocol.V1
             },
             SupportCommands = new Quick.Protocol.Commands.ICommand[]
             {
+                new Commands.GetVersionCommand(),
                 new Commands.ConnectCommand()
             }
         };

@@ -25,6 +25,7 @@ namespace TcpGuardServer
                 InstructionSet = new[] { TcpGuard.Core.Protocol.V1.Instruction.Instance }
             });
             commandExecuterManager = new CommandExecuterManager();
+            commandExecuterManager.Add<GetVersionCommand>(new CommandExecuters.GetVersion());
             commandExecuterManager.Add<ConnectCommand>(new CommandExecuters.Connect());
         }
 

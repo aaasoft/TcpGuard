@@ -53,15 +53,29 @@ namespace TcpGuardClient
                     try { tcpClient.Close(); } catch { }
                 };
                 await qpClient.ConnectAsync();
-                var rep = await qpClient.SendCommand(ConnectCommand.Create(new ConnectCommand.CommandContent()
+                //check version
                 {
-                    Host = portalModel.RemoteHost,
-                    Port = portalModel.RemotePort
-                }));
-                if (rep.Code != 0)
+                    var rep = await qpClient.SendCommand(new GetVersionCommand());
+                    if (rep.Code != 0)
+                        throw new ApplicationException("Get server verion error,reason:" + rep.Message);
+                    var serverVersion = rep.Data;
+                    var clientVersion = this.GetType().Assembly.GetName().Version;
+                    if (clientVersion != serverVersion)
+                        throw new ApplicationException($"Client[{clientVersion}] and server[{serverVersion}] version not match.");
+
+                }
+                //connect
                 {
-                    qpClient.Close();
-                    throw new ApplicationException(rep.Message);
+                    var rep = await qpClient.SendCommand(ConnectCommand.Create(new ConnectCommand.CommandContent()
+                    {
+                        Host = portalModel.RemoteHost,
+                        Port = portalModel.RemotePort
+                    }));
+                    if (rep.Code != 0)
+                    {
+                        qpClient.Close();
+                        throw new ApplicationException(rep.Message);
+                    }
                 }
                 var portal = new Portal(qpClient, tcpClient);
                 portal.Stoped += (sender, e) =>

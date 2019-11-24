@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TcpGuard.Core;
+using TcpGuard.Core.Protocol.V1.Commands;
 
 namespace TcpGuardClient
 {
@@ -226,6 +227,13 @@ namespace TcpGuardClient
             try
             {
                 await client.ConnectAsync();
+                var rep = await client.SendCommand(new GetVersionCommand());
+                if (rep.Code != 0)
+                    throw new ApplicationException("Get server verion error,reason:" + rep.Message);
+                var serverVersion = rep.Data;
+                var clientVersion = this.GetType().Assembly.GetName().Version;
+                if (clientVersion != serverVersion)
+                    throw new ApplicationException($"Client[{clientVersion}] and server[{serverVersion}] version not match.");
                 client.Close();
                 MessageBox.Show("Test success.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -241,7 +249,6 @@ namespace TcpGuardClient
             if (this.WindowState == FormWindowState.Minimized)
             {
                 this.ShowInTaskbar = false;
-                niMain.ShowBalloonTip(1000, Application.ProductName, "I'm here.", ToolTipIcon.Info);
             }
         }
 
