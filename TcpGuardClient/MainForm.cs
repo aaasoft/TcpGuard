@@ -36,6 +36,8 @@ namespace TcpGuardClient
                 addServerToListView(server);
                 server.Init();
             }
+            if (lvServers.Items.Count > 0)
+                lvServers.Items[0].Selected = true;
         }
 
         private void refreshServerListView()
