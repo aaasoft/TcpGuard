@@ -52,18 +52,20 @@ namespace TcpGuard.Core
              {
                  if (t.IsCanceled)
                      return;
-                 lock (send_buffer)
+                 if (send_buffer_index > 0)
                  {
-                     if (send_buffer_index > 0)
+                     byte[] tmpBuffer = null;
+                     lock (send_buffer)
                      {
-                         handler.SendPackage(new TcpPackage() { Buffer = send_buffer.Take(send_buffer_index).ToArray() })
-                         .ContinueWith(t2 =>
-                             {
-                                 if (t2.IsFaulted)
-                                     Stop();
-                             });
+                         tmpBuffer = send_buffer.Take(send_buffer_index).ToArray();
                          send_buffer_index = 0;
                      }
+                     handler.SendPackage(new TcpPackage() { Buffer = tmpBuffer })
+                             .ContinueWith(t2 =>
+                                 {
+                                     if (t2.IsFaulted)
+                                         Stop();
+                                 });
                  }
                  beginSendPackage(token);
              });
@@ -100,7 +102,7 @@ namespace TcpGuard.Core
         public override void Write(byte[] buffer, int offset, int count)
         {
             //如果没有设置发包间隔，则直接发送
-            if (packageSendInterval <= 0)
+            if (packageSendInterval < 10)
             {
                 handler.SendPackage(new TcpPackage() { Buffer = buffer.Skip(offset).Take(count).ToArray() }).Wait();
                 return;

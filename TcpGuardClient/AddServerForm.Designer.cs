@@ -127,9 +127,9 @@
             this.cbEnableCompress.AutoSize = true;
             this.cbEnableCompress.Location = new System.Drawing.Point(101, 93);
             this.cbEnableCompress.Name = "cbEnableCompress";
-            this.cbEnableCompress.Size = new System.Drawing.Size(72, 16);
+            this.cbEnableCompress.Size = new System.Drawing.Size(114, 16);
             this.cbEnableCompress.TabIndex = 101;
-            this.cbEnableCompress.Text = "启用压缩";
+            this.cbEnableCompress.Text = "Enable Compress";
             this.cbEnableCompress.UseVisualStyleBackColor = true;
             // 
             // cbEnableEncrypt
@@ -137,14 +137,15 @@
             this.cbEnableEncrypt.AutoSize = true;
             this.cbEnableEncrypt.Location = new System.Drawing.Point(101, 115);
             this.cbEnableEncrypt.Name = "cbEnableEncrypt";
-            this.cbEnableEncrypt.Size = new System.Drawing.Size(72, 16);
+            this.cbEnableEncrypt.Size = new System.Drawing.Size(108, 16);
             this.cbEnableEncrypt.TabIndex = 101;
-            this.cbEnableEncrypt.Text = "启用加密";
+            this.cbEnableEncrypt.Text = "Enable Encrypt";
             this.cbEnableEncrypt.UseVisualStyleBackColor = true;
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Location = new System.Drawing.Point(200, 146);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);

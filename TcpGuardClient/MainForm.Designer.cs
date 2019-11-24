@@ -34,7 +34,7 @@
             this.gpServers = new System.Windows.Forms.GroupBox();
             this.lvServers = new System.Windows.Forms.ListView();
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.tsServers = new System.Windows.Forms.ToolStrip();
             this.btnAddServer = new System.Windows.Forms.ToolStripButton();
             this.btnEditServer = new System.Windows.Forms.ToolStripButton();
             this.btnDeleteServer = new System.Windows.Forms.ToolStripButton();
@@ -45,19 +45,22 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.tsPortals = new System.Windows.Forms.ToolStrip();
             this.btnAddPortal = new System.Windows.Forms.ToolStripButton();
             this.btnEditPortal = new System.Windows.Forms.ToolStripButton();
             this.btnDeletePortals = new System.Windows.Forms.ToolStripButton();
             this.niMain = new System.Windows.Forms.NotifyIcon(this.components);
+            this.cmsMain = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.miExit = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.scMain)).BeginInit();
             this.scMain.Panel1.SuspendLayout();
             this.scMain.Panel2.SuspendLayout();
             this.scMain.SuspendLayout();
             this.gpServers.SuspendLayout();
-            this.toolStrip2.SuspendLayout();
+            this.tsServers.SuspendLayout();
             this.gbPortals.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
+            this.tsPortals.SuspendLayout();
+            this.cmsMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // scMain
@@ -80,7 +83,7 @@
             // gpServers
             // 
             this.gpServers.Controls.Add(this.lvServers);
-            this.gpServers.Controls.Add(this.toolStrip2);
+            this.gpServers.Controls.Add(this.tsServers);
             this.gpServers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gpServers.Location = new System.Drawing.Point(0, 0);
             this.gpServers.Name = "gpServers";
@@ -110,18 +113,18 @@
             this.columnHeader4.Text = "Host";
             this.columnHeader4.Width = 240;
             // 
-            // toolStrip2
+            // tsServers
             // 
-            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsServers.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnAddServer,
             this.btnEditServer,
             this.btnDeleteServer,
             this.btnTest});
-            this.toolStrip2.Location = new System.Drawing.Point(3, 17);
-            this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(255, 25);
-            this.toolStrip2.TabIndex = 4;
-            this.toolStrip2.Text = "toolStrip2";
+            this.tsServers.Location = new System.Drawing.Point(3, 17);
+            this.tsServers.Name = "tsServers";
+            this.tsServers.Size = new System.Drawing.Size(255, 25);
+            this.tsServers.TabIndex = 4;
+            this.tsServers.Text = "toolStrip2";
             // 
             // btnAddServer
             // 
@@ -165,7 +168,7 @@
             // gbPortals
             // 
             this.gbPortals.Controls.Add(this.lvPortals);
-            this.gbPortals.Controls.Add(this.toolStrip1);
+            this.gbPortals.Controls.Add(this.tsPortals);
             this.gbPortals.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbPortals.Location = new System.Drawing.Point(0, 0);
             this.gbPortals.Name = "gbPortals";
@@ -213,17 +216,17 @@
             // 
             this.columnHeader5.Text = "Runing";
             // 
-            // toolStrip1
+            // tsPortals
             // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsPortals.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnAddPortal,
             this.btnEditPortal,
             this.btnDeletePortals});
-            this.toolStrip1.Location = new System.Drawing.Point(3, 17);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(513, 25);
-            this.toolStrip1.TabIndex = 2;
-            this.toolStrip1.Text = "toolStrip1";
+            this.tsPortals.Location = new System.Drawing.Point(3, 17);
+            this.tsPortals.Name = "tsPortals";
+            this.tsPortals.Size = new System.Drawing.Size(513, 25);
+            this.tsPortals.TabIndex = 2;
+            this.tsPortals.Text = "toolStrip1";
             // 
             // btnAddPortal
             // 
@@ -256,10 +259,25 @@
             // 
             // niMain
             // 
+            this.niMain.ContextMenuStrip = this.cmsMain;
             this.niMain.Icon = ((System.Drawing.Icon)(resources.GetObject("niMain.Icon")));
             this.niMain.Text = "TcpGuard Client";
             this.niMain.Visible = true;
             this.niMain.MouseClick += new System.Windows.Forms.MouseEventHandler(this.niMain_MouseClick);
+            // 
+            // cmsMain
+            // 
+            this.cmsMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miExit});
+            this.cmsMain.Name = "cmsMain";
+            this.cmsMain.Size = new System.Drawing.Size(97, 26);
+            // 
+            // miExit
+            // 
+            this.miExit.Name = "miExit";
+            this.miExit.Size = new System.Drawing.Size(96, 22);
+            this.miExit.Text = "E&xit";
+            this.miExit.Click += new System.EventHandler(this.miExit_Click);
             // 
             // MainForm
             // 
@@ -278,12 +296,13 @@
             this.scMain.ResumeLayout(false);
             this.gpServers.ResumeLayout(false);
             this.gpServers.PerformLayout();
-            this.toolStrip2.ResumeLayout(false);
-            this.toolStrip2.PerformLayout();
+            this.tsServers.ResumeLayout(false);
+            this.tsServers.PerformLayout();
             this.gbPortals.ResumeLayout(false);
             this.gbPortals.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
+            this.tsPortals.ResumeLayout(false);
+            this.tsPortals.PerformLayout();
+            this.cmsMain.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -294,7 +313,7 @@
         private System.Windows.Forms.GroupBox gpServers;
         private System.Windows.Forms.ListView lvServers;
         private System.Windows.Forms.ColumnHeader columnHeader4;
-        private System.Windows.Forms.ToolStrip toolStrip2;
+        private System.Windows.Forms.ToolStrip tsServers;
         private System.Windows.Forms.ToolStripButton btnAddServer;
         private System.Windows.Forms.ToolStripButton btnDeleteServer;
         private System.Windows.Forms.GroupBox gbPortals;
@@ -302,7 +321,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStrip tsPortals;
         private System.Windows.Forms.ToolStripButton btnAddPortal;
         private System.Windows.Forms.ToolStripButton btnDeletePortals;
         private System.Windows.Forms.ToolStripButton btnTest;
@@ -310,6 +329,8 @@
         private System.Windows.Forms.ToolStripButton btnEditServer;
         private System.Windows.Forms.ToolStripButton btnEditPortal;
         private System.Windows.Forms.NotifyIcon niMain;
+        private System.Windows.Forms.ContextMenuStrip cmsMain;
+        private System.Windows.Forms.ToolStripMenuItem miExit;
     }
 }
 

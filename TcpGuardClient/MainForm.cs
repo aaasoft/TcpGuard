@@ -262,5 +262,10 @@ namespace TcpGuardClient
                 this.Activate();
             }
         }
+
+        private void miExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
