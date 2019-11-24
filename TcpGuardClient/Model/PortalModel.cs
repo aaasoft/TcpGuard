@@ -19,6 +19,10 @@ namespace TcpGuardClient.Model
         /// Remote port
         /// </summary>
         public int RemotePort { get; set; }
+        /// <summary>
+        /// Package send interval
+        /// </summary>
+        public int SendInterval { get; set; }
 
         [JsonIgnore]
         public bool IsRuning { get; set; }

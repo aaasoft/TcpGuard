@@ -11,6 +11,7 @@ namespace TcpGuard.Core.Protocol.V1.Commands
         {
             public string Host { get; set; }
             public int Port { get; set; }
+            public int SendInterval { get; set; }
         }
 
         public static ConnectCommand Create(CommandContent model)

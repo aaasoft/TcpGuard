@@ -27,7 +27,7 @@ namespace TcpGuardServer.CommandExecuters
             try
             {
                 await tcpClient.ConnectAsync(commandContent.Host, commandContent.Port);
-                portal = new Portal(handler, tcpClient);
+                portal = new Portal(handler, tcpClient, commandContent.SendInterval);
                 portal.Stoped += (sender, e) =>
                   {
                       tcpClient.Close();

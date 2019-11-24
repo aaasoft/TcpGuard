@@ -27,6 +27,7 @@ namespace TcpGuardClient
             Model.RemoteHost = txtRemoteHost.Text.Trim();
             Model.RemotePort = Convert.ToInt32(nudRemotePort.Value);
             Model.Port = Convert.ToInt32(nudLocalPort.Value);
+            Model.SendInterval = Convert.ToInt32(nudSendInterval.Value);
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
@@ -38,6 +39,7 @@ namespace TcpGuardClient
                 txtRemoteHost.Text = Model.RemoteHost;
                 nudRemotePort.Value = Model.RemotePort;
                 nudLocalPort.Value = Model.Port;
+                nudSendInterval.Value = Model.SendInterval;
                 this.Text = "Edit Portal";
             }
         }

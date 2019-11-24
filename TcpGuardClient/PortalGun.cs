@@ -69,7 +69,8 @@ namespace TcpGuardClient
                     var rep = await qpClient.SendCommand(ConnectCommand.Create(new ConnectCommand.CommandContent()
                     {
                         Host = portalModel.RemoteHost,
-                        Port = portalModel.RemotePort
+                        Port = portalModel.RemotePort,
+                        SendInterval = portalModel.SendInterval
                     }));
                     if (rep.Code != 0)
                     {
@@ -77,7 +78,7 @@ namespace TcpGuardClient
                         throw new ApplicationException(rep.Message);
                     }
                 }
-                var portal = new Portal(qpClient, tcpClient);
+                var portal = new Portal(qpClient, tcpClient, portalModel.SendInterval);
                 portal.Stoped += (sender, e) =>
                 {
                     try { qpClient.Close(); } catch { }
