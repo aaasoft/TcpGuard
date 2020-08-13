@@ -222,8 +222,6 @@ namespace TcpGuardClient
                 Host = model.Host,
                 Port = model.Port,
                 Password = model.Password,
-                EnableCompress = false,
-                EnableEncrypt = false,
                 InstructionSet = new[] { TcpGuard.Core.Protocol.V1.Instruction.Instance }
             });
             try

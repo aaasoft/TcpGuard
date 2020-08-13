@@ -60,12 +60,14 @@ namespace TcpGuard.Core
                          tmpBuffer = send_buffer.Take(send_buffer_index).ToArray();
                          send_buffer_index = 0;
                      }
-                     handler.SendPackage(new TcpPackage() { Buffer = tmpBuffer })
-                             .ContinueWith(t2 =>
-                                 {
-                                     if (t2.IsFaulted)
-                                         Stop();
-                                 });
+                     try
+                     {
+                         handler.SendPackage(new TcpPackage() { Buffer = tmpBuffer });
+                     }
+                     catch
+                     {
+                         Stop();
+                     }
                  }
                  beginSendPackage(token);
              });
@@ -104,7 +106,7 @@ namespace TcpGuard.Core
             //如果没有设置发包间隔，则直接发送
             if (packageSendInterval < 10)
             {
-                handler.SendPackage(new TcpPackage() { Buffer = buffer.Skip(offset).Take(count).ToArray() }).Wait();
+                handler.SendPackage(new TcpPackage() { Buffer = buffer.Skip(offset).Take(count).ToArray() });
                 return;
             }
             var sleepTime = 0;

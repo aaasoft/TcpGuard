@@ -10,28 +10,33 @@ namespace TcpGuardServer
     {
         static void Main(string[] args)
         {
-            if (args.Length < 2)
-            {
-                Console.WriteLine("Arg[0]: Listen port;Arg[1]: Password.");
-                return;
-            }
-            var port = int.Parse(args[0]);
-            var password = args[1];
-            var manager = new QpManager(port, password);
+            var appSettingsModel = Quick.Fields.AppSettings.Model.Load();
+            var configModel = appSettingsModel.Convert<ConfigModel>();
+
+            var manager = new QpManager(configModel);
             manager.Start();
             Console.WriteLine("TcpGuard started.");
+
+            bool shouldReadLine = true;
             while (true)
             {
-                //如果输入被重定向，则不调用ReadLine
-                if (Console.IsInputRedirected)
+                //如果不读输出的行
+                if (!shouldReadLine)
                 {
-                    Thread.Sleep(5000);
+                    Thread.Sleep(10 * 1000);
                     continue;
                 }
-                Console.Write(">");
-                var line = Console.ReadLine()?.Trim();
-                if (line == "exit")
-                    break;
+                try
+                {
+                    Console.Write(">");
+                    var line = Console.ReadLine();
+                    if (line == "exit")
+                        break;
+                }
+                catch
+                {
+                    shouldReadLine = false;
+                }
             }
             manager.Stop();
             Environment.Exit(0);

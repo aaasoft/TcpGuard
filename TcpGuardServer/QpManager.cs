@@ -15,13 +15,13 @@ namespace TcpGuardServer
         private QpTcpServer server;
         private CommandExecuterManager commandExecuterManager;
 
-        public QpManager(int port, string password)
+        public QpManager(ConfigModel configModel)
         {
             server = new QpTcpServer(new QpTcpServerOptions()
             {
-                Address = IPAddress.Any,
-                Port = port,
-                Password = password,
+                Address = IPAddress.Parse(configModel.Host),
+                Port = configModel.Port,
+                Password = configModel.Password,
                 InstructionSet = new[] { TcpGuard.Core.Protocol.V1.Instruction.Instance }
             });
             commandExecuterManager = new CommandExecuterManager();

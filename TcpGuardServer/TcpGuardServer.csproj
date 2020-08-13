@@ -3,15 +3,24 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <Version>1.0.3</Version>
+    <RollForward>Major</RollForward>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <Version>1.0.4</Version>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Quick.Fields" Version="1.0.6" />
     <PackageReference Include="Quick.Protocol.Tcp" Version="1.2.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\TcpGuard.Core\TcpGuard.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

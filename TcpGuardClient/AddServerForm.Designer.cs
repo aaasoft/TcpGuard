@@ -35,8 +35,6 @@
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.nudPort = new System.Windows.Forms.NumericUpDown();
             this.btnSave = new System.Windows.Forms.Button();
-            this.cbEnableCompress = new System.Windows.Forms.CheckBox();
-            this.cbEnableEncrypt = new System.Windows.Forms.CheckBox();
             this.btnCancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudPort)).BeginInit();
             this.SuspendLayout();
@@ -114,7 +112,7 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(119, 146);
+            this.btnSave.Location = new System.Drawing.Point(119, 93);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 100;
@@ -122,31 +120,11 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // cbEnableCompress
-            // 
-            this.cbEnableCompress.AutoSize = true;
-            this.cbEnableCompress.Location = new System.Drawing.Point(101, 93);
-            this.cbEnableCompress.Name = "cbEnableCompress";
-            this.cbEnableCompress.Size = new System.Drawing.Size(114, 16);
-            this.cbEnableCompress.TabIndex = 101;
-            this.cbEnableCompress.Text = "Enable Compress";
-            this.cbEnableCompress.UseVisualStyleBackColor = true;
-            // 
-            // cbEnableEncrypt
-            // 
-            this.cbEnableEncrypt.AutoSize = true;
-            this.cbEnableEncrypt.Location = new System.Drawing.Point(101, 115);
-            this.cbEnableEncrypt.Name = "cbEnableEncrypt";
-            this.cbEnableEncrypt.Size = new System.Drawing.Size(108, 16);
-            this.cbEnableEncrypt.TabIndex = 101;
-            this.cbEnableEncrypt.Text = "Enable Encrypt";
-            this.cbEnableEncrypt.UseVisualStyleBackColor = true;
-            // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(200, 146);
+            this.btnCancel.Location = new System.Drawing.Point(200, 93);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 100;
@@ -160,9 +138,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(317, 181);
-            this.Controls.Add(this.cbEnableEncrypt);
-            this.Controls.Add(this.cbEnableCompress);
+            this.ClientSize = new System.Drawing.Size(317, 136);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.nudPort);
@@ -191,8 +167,6 @@
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.NumericUpDown nudPort;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.CheckBox cbEnableCompress;
-        private System.Windows.Forms.CheckBox cbEnableEncrypt;
         private System.Windows.Forms.Button btnCancel;
     }
 }
