@@ -231,6 +231,8 @@ namespace TcpGuardClient
                             Host = uri.Host,
                             Port = uri.Port,
                             Password = model.Password,
+                            EnableCompress = model.EnableCompress,
+                            EnableEncrypt = model.EnableEncrypt,
                             InstructionSet = new[] { TcpGuard.Core.Protocol.V1.Instruction.Instance }
                         });
                         break;
@@ -239,6 +241,8 @@ namespace TcpGuardClient
                         {
                             Url = model.Url,
                             Password = model.Password,
+                            EnableCompress = model.EnableCompress,
+                            EnableEncrypt = model.EnableEncrypt,
                             InstructionSet = new[] { TcpGuard.Core.Protocol.V1.Instruction.Instance }
                         });
                         break;

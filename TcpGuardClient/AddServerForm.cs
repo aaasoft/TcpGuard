@@ -25,6 +25,8 @@ namespace TcpGuardClient
             {
                 txtUrl.Text = Model.Url;
                 txtPassword.Text = Model.Password;
+                cbEnableCompress.Checked = Model.EnableCompress;
+                cbEnableEncrypt.Checked = Model.EnableEncrypt;
                 this.Text = "Edit Server";
             }
         }
@@ -36,6 +38,8 @@ namespace TcpGuardClient
 
             Model.Url = txtUrl.Text.Trim();
             Model.Password = txtPassword.Text.Trim();
+            Model.EnableCompress = cbEnableCompress.Checked;
+            Model.EnableEncrypt = cbEnableEncrypt.Checked;
 
             this.DialogResult = DialogResult.OK;
             this.Close();

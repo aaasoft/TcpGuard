@@ -21,12 +21,13 @@ namespace Microsoft.AspNetCore.Builder
 
             QpWebSocketServer server = null;
             app.UseQuickProtocol(options, out server);
+            server.Start();
 
             var commandExecuterManager = new CommandExecuterManager();
             commandExecuterManager.Add<GetVersionCommand>(new TcpGuard.Core.CommandExecuters.GetVersion());
             commandExecuterManager.Add<ConnectCommand>(new TcpGuard.Core.CommandExecuters.Connect());
 
-            server.ChannelConnected += (sender, e) => e.CommandExecuter = commandExecuterManager;
+            server.ChannelConnected += (sender, e) => e.CommandExecuter = commandExecuterManager;            
             return app;
         }
     }
