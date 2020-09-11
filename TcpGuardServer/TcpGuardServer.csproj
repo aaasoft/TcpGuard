@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TcpGuard.Core\TcpGuard.Core.csproj" />
+    <ProjectReference Include="..\TcpGuard.Server.Tcp\TcpGuard.Server.Tcp.csproj" />
   </ItemGroup>
 
   <ItemGroup>

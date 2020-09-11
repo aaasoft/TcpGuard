@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcpGuardClient", "TcpGuardC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcpGuardSite", "TcpGuardSite\TcpGuardSite.csproj", "{CDA2B443-EBD8-411E-910B-43DC14267FD4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcpGuard.Server.Tcp", "TcpGuard.Server.Tcp\TcpGuard.Server.Tcp.csproj", "{68CFFEA8-F338-42DE-96E5-70B615E9843F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcpGuard.Server.WebSocket", "TcpGuard.Server.WebSocket\TcpGuard.Server.WebSocket.csproj", "{B07F3CA4-6B55-40A9-AF18-B9FEFBC7C644}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{CDA2B443-EBD8-411E-910B-43DC14267FD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CDA2B443-EBD8-411E-910B-43DC14267FD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CDA2B443-EBD8-411E-910B-43DC14267FD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68CFFEA8-F338-42DE-96E5-70B615E9843F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68CFFEA8-F338-42DE-96E5-70B615E9843F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68CFFEA8-F338-42DE-96E5-70B615E9843F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68CFFEA8-F338-42DE-96E5-70B615E9843F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B07F3CA4-6B55-40A9-AF18-B9FEFBC7C644}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B07F3CA4-6B55-40A9-AF18-B9FEFBC7C644}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B07F3CA4-6B55-40A9-AF18-B9FEFBC7C644}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B07F3CA4-6B55-40A9-AF18-B9FEFBC7C644}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

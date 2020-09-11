@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Quick.Protocol.Tcp;
+using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
@@ -13,8 +14,15 @@ namespace TcpGuardServer
             var appSettingsModel = Quick.Fields.AppSettings.Model.Load();
             var configModel = appSettingsModel.Convert<ConfigModel>();
 
-            var manager = new QpManager(configModel);
-            manager.Start();
+            var server = new TcpGuard.Server.Tcp.Server(new QpTcpServerOptions()
+            {
+                ServerProgram = nameof(TcpGuardServer),
+                Address = IPAddress.Parse(configModel.Host),
+                Port = configModel.Port,
+                Password = configModel.Password,
+                InstructionSet = new[] { TcpGuard.Core.Protocol.V1.Instruction.Instance }
+            });
+            server.Start();
             Console.WriteLine("TcpGuard started.");
 
             bool shouldReadLine = true;
@@ -38,7 +46,7 @@ namespace TcpGuardServer
                     shouldReadLine = false;
                 }
             }
-            manager.Stop();
+            server.Stop();
             Environment.Exit(0);
         }
     }

@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
+    <Version>1.0.5</Version>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Quick.Protocol" Version="1.2.21" />
+    <PackageReference Include="Quick.Protocol.Tcp" Version="1.2.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TcpGuard.Core\TcpGuard.Core.csproj" />
+  </ItemGroup>
+</Project>
