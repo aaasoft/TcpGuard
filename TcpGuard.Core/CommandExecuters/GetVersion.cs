@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using TcpGuard.Core.Protocol.V1.Commands;
 
-namespace TcpGuardServer.CommandExecuters
+namespace TcpGuard.Core.CommandExecuters
 {
     public class GetVersion : AbstractCommandExecuter<GetVersionCommand>
     {

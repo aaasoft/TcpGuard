@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using TcpGuard.Core;
 using TcpGuard.Core.Protocol.V1.Commands;
 
-namespace TcpGuardServer.CommandExecuters
+namespace TcpGuard.Core.CommandExecuters
 {
     public class Connect : AbstractCommandExecuter<ConnectCommand>
     {
