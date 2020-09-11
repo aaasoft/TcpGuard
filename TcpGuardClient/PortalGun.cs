@@ -1,4 +1,6 @@
-﻿using Quick.Protocol.Tcp;
+﻿using Quick.Protocol.Core;
+using Quick.Protocol.Tcp;
+using Quick.Protocol.WebSocket.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +31,7 @@ namespace TcpGuardClient
 
         public void Start()
         {
-            listener = new TcpListener(IPAddress.Any, portalModel.Port);
+            listener = new TcpListener(IPAddress.Parse(portalModel.LocalIpAddress), portalModel.LocalPort);
             listener.Start();
             _ = beginAcceptTcpClient();
         }
@@ -39,13 +41,28 @@ namespace TcpGuardClient
             var tcpClient = await listener.AcceptTcpClientAsync();
             try
             {
-                var qpClient = new QpTcpClient(new QpTcpClientOptions()
+                var uri = new Uri(serverModel.Url);
+                QpClient qpClient = null;
+                switch (uri.Scheme)
                 {
-                    Host = serverModel.Host,
-                    Port = serverModel.Port,
-                    Password = serverModel.Password,
-                    InstructionSet = new[] { TcpGuard.Core.Protocol.V1.Instruction.Instance }
-                });
+                    case "tcp":
+                        qpClient = new QpTcpClient(new QpTcpClientOptions()
+                        {
+                            Host = uri.Host,
+                            Port = uri.Port,
+                            Password = serverModel.Password,
+                            InstructionSet = new[] { TcpGuard.Core.Protocol.V1.Instruction.Instance }
+                        });
+                        break;
+                    case "ws":
+                        qpClient = new QpWebSocketClient(new QpWebSocketClientOptions()
+                        {
+                            Url = serverModel.Url,
+                            Password = serverModel.Password,
+                            InstructionSet = new[] { TcpGuard.Core.Protocol.V1.Instruction.Instance }
+                        });
+                        break;
+                }
                 qpClient.Disconnected += (sender, e) =>
                 {
                     try { tcpClient.Close(); } catch { }

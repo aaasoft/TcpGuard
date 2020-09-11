@@ -1,5 +1,6 @@
-﻿using Quick.Protocol.Commands;
-using Quick.Protocol.Tcp;
+﻿using Microsoft.AspNetCore.Builder;
+using Quick.Protocol.Commands;
+using Quick.Protocol.WebSocket.Server.AspNetCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,23 +9,22 @@ using System.Text;
 using TcpGuard.Core;
 using TcpGuard.Core.Protocol.V1.Commands;
 
-namespace TcpGuardServer
+namespace TcpGuardSite
 {
     public class QpManager
     {
-        private QpTcpServer server;
+        private QpWebSocketServer server;
         private CommandExecuterManager commandExecuterManager;
 
-        public QpManager(ConfigModel configModel)
+        public QpManager(IApplicationBuilder app, ConfigModel configModel)
         {
-            server = new QpTcpServer(new QpTcpServerOptions()
+            app.UseQuickProtocol(new QpWebSocketServerOptions()
             {
-                ServerProgram = nameof(TcpGuardServer),
-                Address = IPAddress.Parse(configModel.Host),
-                Port = configModel.Port,
+                ServerProgram = nameof(TcpGuardSite),
+                Path = "/",
                 Password = configModel.Password,
                 InstructionSet = new[] { TcpGuard.Core.Protocol.V1.Instruction.Instance }
-            });
+            }, out server);
             commandExecuterManager = new CommandExecuterManager();
             commandExecuterManager.Add<GetVersionCommand>(new CommandExecuters.GetVersion());
             commandExecuterManager.Add<ConnectCommand>(new CommandExecuters.Connect());
@@ -33,7 +33,6 @@ namespace TcpGuardServer
         public void Start()
         {
             server.ChannelConnected += Server_ChannelConnected;
-            server.Start();
         }
 
         private void Server_ChannelConnected(object sender, Quick.Protocol.Core.QpServerChannel e)
@@ -43,7 +42,7 @@ namespace TcpGuardServer
 
         public void Stop()
         {
-            server.Stop();
+            server.ChannelConnected -= Server_ChannelConnected;
         }
     }
 }

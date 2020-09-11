@@ -29,47 +29,36 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.txtHost = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.txtUrl = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtPassword = new System.Windows.Forms.TextBox();
-            this.nudPort = new System.Windows.Forms.NumericUpDown();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.nudPort)).BeginInit();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(60, 15);
+            this.label1.Location = new System.Drawing.Point(61, 15);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 12);
+            this.label1.Size = new System.Drawing.Size(29, 12);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Host:";
+            this.label1.Text = "Url:";
             // 
-            // txtHost
+            // txtUrl
             // 
-            this.txtHost.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtHost.Location = new System.Drawing.Point(101, 12);
-            this.txtHost.Name = "txtHost";
-            this.txtHost.Size = new System.Drawing.Size(174, 21);
-            this.txtHost.TabIndex = 1;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(60, 42);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 12);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Port:";
+            this.txtUrl.Location = new System.Drawing.Point(102, 12);
+            this.txtUrl.Name = "txtUrl";
+            this.txtUrl.Size = new System.Drawing.Size(212, 21);
+            this.txtUrl.TabIndex = 1;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(36, 69);
+            this.label3.Location = new System.Drawing.Point(37, 81);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(59, 12);
             this.label3.TabIndex = 0;
@@ -79,40 +68,16 @@
             // 
             this.txtPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPassword.Location = new System.Drawing.Point(101, 66);
+            this.txtPassword.Location = new System.Drawing.Point(102, 78);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '●';
-            this.txtPassword.Size = new System.Drawing.Size(174, 21);
+            this.txtPassword.Size = new System.Drawing.Size(212, 21);
             this.txtPassword.TabIndex = 3;
-            // 
-            // nudPort
-            // 
-            this.nudPort.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.nudPort.Location = new System.Drawing.Point(101, 39);
-            this.nudPort.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-            this.nudPort.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudPort.Name = "nudPort";
-            this.nudPort.Size = new System.Drawing.Size(174, 21);
-            this.nudPort.TabIndex = 2;
-            this.nudPort.Value = new decimal(new int[] {
-            3000,
-            0,
-            0,
-            0});
             // 
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(119, 93);
+            this.btnSave.Location = new System.Drawing.Point(158, 105);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 100;
@@ -124,7 +89,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(200, 93);
+            this.btnCancel.Location = new System.Drawing.Point(239, 105);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 100;
@@ -132,27 +97,34 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(100, 36);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(215, 24);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "QP/TCP -> tcp://127.0.0.1:1234\r\nQP/WebSocket -> ws://127.0.0.1:1234";
+            // 
             // AddServerForm
             // 
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(317, 136);
+            this.ClientSize = new System.Drawing.Size(355, 152);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.nudPort);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.label3);
+            this.Controls.Add(this.txtUrl);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtHost);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "AddServerForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Add Server";
             this.Load += new System.EventHandler(this.AddServerForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.nudPort)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -161,12 +133,11 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtHost;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtUrl;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtPassword;
-        private System.Windows.Forms.NumericUpDown nudPort;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Label label2;
     }
 }

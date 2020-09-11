@@ -38,6 +38,8 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.nudSendInterval = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtLocalIpAddress = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudRemotePort)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLocalPort)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSendInterval)).BeginInit();
@@ -97,7 +99,7 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(149, 120);
+            this.btnSave.Location = new System.Drawing.Point(149, 147);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 100;
@@ -108,7 +110,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(54, 68);
+            this.label3.Location = new System.Drawing.Point(54, 95);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(71, 12);
             this.label3.TabIndex = 0;
@@ -118,7 +120,7 @@
             // 
             this.nudLocalPort.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.nudLocalPort.Location = new System.Drawing.Point(131, 66);
+            this.nudLocalPort.Location = new System.Drawing.Point(131, 93);
             this.nudLocalPort.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -131,7 +133,7 @@
             0});
             this.nudLocalPort.Name = "nudLocalPort";
             this.nudLocalPort.Size = new System.Drawing.Size(174, 21);
-            this.nudLocalPort.TabIndex = 3;
+            this.nudLocalPort.TabIndex = 4;
             this.nudLocalPort.Value = new decimal(new int[] {
             3000,
             0,
@@ -142,7 +144,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(230, 120);
+            this.btnCancel.Location = new System.Drawing.Point(230, 147);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 101;
@@ -154,7 +156,7 @@
             // 
             this.nudSendInterval.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.nudSendInterval.Location = new System.Drawing.Point(131, 93);
+            this.nudSendInterval.Location = new System.Drawing.Point(131, 120);
             this.nudSendInterval.Maximum = new decimal(new int[] {
             100000000,
             0,
@@ -162,7 +164,7 @@
             0});
             this.nudSendInterval.Name = "nudSendInterval";
             this.nudSendInterval.Size = new System.Drawing.Size(174, 21);
-            this.nudSendInterval.TabIndex = 4;
+            this.nudSendInterval.TabIndex = 5;
             this.nudSendInterval.Value = new decimal(new int[] {
             20,
             0,
@@ -172,11 +174,29 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(18, 95);
+            this.label4.Location = new System.Drawing.Point(18, 122);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(113, 12);
             this.label4.TabIndex = 102;
             this.label4.Text = "Send Interval(ms):";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(18, 69);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(107, 12);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Local IP Address:";
+            // 
+            // txtLocalIpAddress
+            // 
+            this.txtLocalIpAddress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtLocalIpAddress.Location = new System.Drawing.Point(131, 66);
+            this.txtLocalIpAddress.Name = "txtLocalIpAddress";
+            this.txtLocalIpAddress.Size = new System.Drawing.Size(174, 21);
+            this.txtLocalIpAddress.TabIndex = 3;
             // 
             // AddPortalForm
             // 
@@ -184,7 +204,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(317, 154);
+            this.ClientSize = new System.Drawing.Size(317, 178);
             this.Controls.Add(this.nudSendInterval);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnCancel);
@@ -193,6 +213,8 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.nudRemotePort);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.txtLocalIpAddress);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.txtRemoteHost);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -220,5 +242,7 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.NumericUpDown nudSendInterval;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtLocalIpAddress;
     }
 }

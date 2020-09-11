@@ -23,8 +23,7 @@ namespace TcpGuardClient
         {
             if (Model != null)
             {
-                txtHost.Text = Model.Host;
-                nudPort.Value = Model.Port;
+                txtUrl.Text = Model.Url;
                 txtPassword.Text = Model.Password;
                 this.Text = "Edit Server";
             }
@@ -35,8 +34,7 @@ namespace TcpGuardClient
             if (Model == null)
                 Model = new Model.ServerModel();
 
-            Model.Host = txtHost.Text.Trim();
-            Model.Port = Convert.ToInt32(nudPort.Value);
+            Model.Url = txtUrl.Text.Trim();
             Model.Password = txtPassword.Text.Trim();
 
             this.DialogResult = DialogResult.OK;

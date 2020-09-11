@@ -8,9 +8,14 @@ namespace TcpGuardClient.Model
     public class PortalModel
     {
         /// <summary>
+        /// Portal listen IP Address
+        /// </summary>
+        public string LocalIpAddress { get; set; } = "127.0.0.1";
+        /// <summary>
         /// Portal listen port
         /// </summary>
-        public int Port { get; set; }
+        public int LocalPort { get; set; }
+
         /// <summary>
         /// Remote host
         /// </summary>
@@ -32,12 +37,12 @@ namespace TcpGuardClient.Model
             var b = (PortalModel)obj;
             if (b == null)
                 return false;
-            return Port == b.Port;
+            return LocalIpAddress == b.LocalIpAddress && LocalPort == b.LocalPort;
         }
 
         public override int GetHashCode()
         {
-            return Port.GetHashCode();
+            return (LocalIpAddress + LocalPort).GetHashCode();
         }
     }
 }

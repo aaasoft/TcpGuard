@@ -52,6 +52,7 @@
             this.niMain = new System.Windows.Forms.NotifyIcon(this.components);
             this.cmsMain = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.miExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.scMain)).BeginInit();
             this.scMain.Panel1.SuspendLayout();
             this.scMain.Panel2.SuspendLayout();
@@ -183,6 +184,7 @@
             this.lvPortals.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
+            this.columnHeader6,
             this.columnHeader3,
             this.columnHeader5});
             this.lvPortals.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -200,17 +202,17 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "Remote Host";
-            this.columnHeader1.Width = 200;
+            this.columnHeader1.Width = 160;
             // 
             // columnHeader2
             // 
             this.columnHeader2.Text = "Remote Port";
-            this.columnHeader2.Width = 120;
+            this.columnHeader2.Width = 80;
             // 
             // columnHeader3
             // 
             this.columnHeader3.Text = "Local Port";
-            this.columnHeader3.Width = 120;
+            this.columnHeader3.Width = 80;
             // 
             // columnHeader5
             // 
@@ -279,6 +281,11 @@
             this.miExit.Text = "E&xit";
             this.miExit.Click += new System.EventHandler(this.miExit_Click);
             // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "Local IP Address";
+            this.columnHeader6.Width = 120;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -331,6 +338,7 @@
         private System.Windows.Forms.NotifyIcon niMain;
         private System.Windows.Forms.ContextMenuStrip cmsMain;
         private System.Windows.Forms.ToolStripMenuItem miExit;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
     }
 }
 
