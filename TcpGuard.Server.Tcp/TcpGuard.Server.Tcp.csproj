@@ -6,7 +6,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Quick.Protocol" Version="1.2.22" />
+    <PackageReference Include="Quick.Protocol" Version="1.2.23" />
     <PackageReference Include="Quick.Protocol.Tcp" Version="1.2.0" />
   </ItemGroup>
   <ItemGroup>

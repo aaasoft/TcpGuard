@@ -50,8 +50,8 @@
     <Reference Include="protobuf-net, Version=2.4.0.0, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
       <HintPath>..\packages\protobuf-net.2.4.0\lib\net40\protobuf-net.dll</HintPath>
     </Reference>
-    <Reference Include="Quick.Protocol, Version=1.2.22.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Quick.Protocol.1.2.22\lib\net45\Quick.Protocol.dll</HintPath>
+    <Reference Include="Quick.Protocol, Version=1.2.23.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Quick.Protocol.1.2.23\lib\net45\Quick.Protocol.dll</HintPath>
     </Reference>
     <Reference Include="Quick.Protocol.Tcp, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Quick.Protocol.Tcp.1.2.0\lib\net45\Quick.Protocol.Tcp.dll</HintPath>

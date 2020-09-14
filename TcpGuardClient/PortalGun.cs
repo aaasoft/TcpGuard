@@ -38,9 +38,10 @@ namespace TcpGuardClient
 
         private async Task beginAcceptTcpClient()
         {
-            var tcpClient = await listener.AcceptTcpClientAsync();
+            TcpClient tcpClient = null;
             try
             {
+                tcpClient= await listener.AcceptTcpClientAsync();
                 var uri = new Uri(serverModel.Url);
                 QpClient qpClient = null;
                 switch (uri.Scheme)
@@ -110,7 +111,7 @@ namespace TcpGuardClient
             }
             catch
             {
-                try { tcpClient.Close(); } catch { }
+                try { tcpClient?.Close(); } catch { }
                 lock (portalDict)
                     if (portalDict.ContainsKey(portalModel))
                         portalDict.Remove(portalModel);

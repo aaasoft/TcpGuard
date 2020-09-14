@@ -31,6 +31,7 @@ namespace TcpGuardSite
             app.UseWebSockets();
             app.UseTcpGuardServer(new QpWebSocketServerOptions()
             {
+                BufferSize = 10 * 1024 * 1024,
                 Password = Program.ConfigModel.Password
             });
             app.UseEndpoints(endpoints =>
