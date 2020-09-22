@@ -14,8 +14,7 @@ namespace TcpGuard.Server.Tcp
         {
             server = new QpTcpServer(options);
             commandExecuterManager = new CommandExecuterManager();
-            commandExecuterManager.Add<GetVersionCommand>(new Core.CommandExecuters.GetVersion());
-            commandExecuterManager.Add<ConnectCommand>(new Core.CommandExecuters.Connect());
+            commandExecuterManager.UseTcpGuardServer();
         }
 
         public void Start()
