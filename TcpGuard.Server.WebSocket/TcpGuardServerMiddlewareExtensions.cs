@@ -24,8 +24,7 @@ namespace Microsoft.AspNetCore.Builder
             server.Start();
 
             var commandExecuterManager = new CommandExecuterManager();
-            commandExecuterManager.Add<GetVersionCommand>(new TcpGuard.Core.CommandExecuters.GetVersion());
-            commandExecuterManager.Add<ConnectCommand>(new TcpGuard.Core.CommandExecuters.Connect());
+            commandExecuterManager.UseTcpGuardServer();
 
             server.ChannelConnected += (sender, e) => e.CommandExecuter = commandExecuterManager;            
             return app;
