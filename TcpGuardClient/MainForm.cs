@@ -1,6 +1,5 @@
 ﻿using Quick.Protocol.Core;
 using Quick.Protocol.Tcp;
-using Quick.Protocol.WebSocket.Client;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -84,7 +83,7 @@ namespace TcpGuardClient
 
         private void addServerToListView(Model.ServerModel model)
         {
-            var lvi = new ListViewItem(model.Url);
+            var lvi = new ListViewItem($"{model.Host}:{model.Port}");
             lvi.Tag = model;
             lvServers.Items.Add(lvi);
         }
@@ -124,7 +123,7 @@ namespace TcpGuardClient
                 return;
             var lvi = lvServers.SelectedItems[0];
             var model = (Model.ServerModel)lvi.Tag;
-            var ret = MessageBox.Show($"Are you really want to delete server[{model.Url}]?", Application.ProductName, MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            var ret = MessageBox.Show($"Are you really want to delete server[{model.Host}:{model.Port}]?", Application.ProductName, MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if (ret == DialogResult.Cancel)
                 return;
 
@@ -218,37 +217,17 @@ namespace TcpGuardClient
             var lvi = lvServers.SelectedItems[0];
             var model = (Model.ServerModel)lvi.Tag;
 
-            showLoading($"Testing server[{model.Url}]...");
-            var uri = new Uri(model.Url);
-            QpClient client = null;
+            showLoading($"Testing server[{model.Host}:{model.Port}]...");
             try
             {
-                switch (uri.Scheme)
+                QpClient client = new QpTcpClient(new QpTcpClientOptions()
                 {
-                    case "tcp":
-                        client = new QpTcpClient(new QpTcpClientOptions()
-                        {
-                            Host = uri.Host,
-                            Port = uri.Port,
-                            Password = model.Password,
-                            EnableCompress = model.EnableCompress,
-                            EnableEncrypt = model.EnableEncrypt,
-                            InstructionSet = new[] { TcpGuard.Core.Protocol.V1.Instruction.Instance }
-                        });
-                        break;
-                    case "ws":
-                        client = new QpWebSocketClient(new QpWebSocketClientOptions()
-                        {
-                            Url = model.Url,
-                            Password = model.Password,
-                            EnableCompress = model.EnableCompress,
-                            EnableEncrypt = model.EnableEncrypt,
-                            InstructionSet = new[] { TcpGuard.Core.Protocol.V1.Instruction.Instance }
-                        });
-                        break;
-                }
-                if (client == null)
-                    throw new ApplicationException($"Unknown Url:{model.Url}");
+                    Host = model.Host,
+                    Port = model.Port,
+                    Password = model.Password,
+                    InstructionSet = new[] { TcpGuard.Core.Protocol.V1.Instruction.Instance }
+                });
+
                 await client.ConnectAsync();
                 var rep = await client.SendCommand(new GetVersionCommand());
                 if (rep.Code != 0)

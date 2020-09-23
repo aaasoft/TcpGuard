@@ -1,6 +1,5 @@
 ﻿using Quick.Protocol.Core;
 using Quick.Protocol.Tcp;
-using Quick.Protocol.WebSocket.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,32 +41,13 @@ namespace TcpGuardClient
             try
             {
                 tcpClient= await listener.AcceptTcpClientAsync();
-                var uri = new Uri(serverModel.Url);
-                QpClient qpClient = null;
-                switch (uri.Scheme)
+                QpClient qpClient = new QpTcpClient(new QpTcpClientOptions()
                 {
-                    case "tcp":
-                        qpClient = new QpTcpClient(new QpTcpClientOptions()
-                        {
-                            Host = uri.Host,
-                            Port = uri.Port,
-                            Password = serverModel.Password,
-                            EnableCompress = serverModel.EnableCompress,
-                            EnableEncrypt = serverModel.EnableEncrypt,
-                            InstructionSet = new[] { TcpGuard.Core.Protocol.V1.Instruction.Instance }
-                        });
-                        break;
-                    case "ws":
-                        qpClient = new QpWebSocketClient(new QpWebSocketClientOptions()
-                        {
-                            Url = serverModel.Url,
-                            Password = serverModel.Password,
-                            EnableCompress = serverModel.EnableCompress,
-                            EnableEncrypt = serverModel.EnableEncrypt,
-                            InstructionSet = new[] { TcpGuard.Core.Protocol.V1.Instruction.Instance }
-                        });
-                        break;
-                }
+                    Host = serverModel.Host,
+                    Port = serverModel.Port,
+                    Password = serverModel.Password,
+                    InstructionSet = new[] { TcpGuard.Core.Protocol.V1.Instruction.Instance }
+                });
                 qpClient.Disconnected += (sender, e) =>
                 {
                     try { tcpClient.Close(); } catch { }

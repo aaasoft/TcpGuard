@@ -23,10 +23,9 @@ namespace TcpGuardClient
         {
             if (Model != null)
             {
-                txtUrl.Text = Model.Url;
+                txtHost.Text = Model.Host;
+                nudPort.Value = Model.Port;
                 txtPassword.Text = Model.Password;
-                cbEnableCompress.Checked = Model.EnableCompress;
-                cbEnableEncrypt.Checked = Model.EnableEncrypt;
                 this.Text = "Edit Server";
             }
         }
@@ -36,10 +35,9 @@ namespace TcpGuardClient
             if (Model == null)
                 Model = new Model.ServerModel();
 
-            Model.Url = txtUrl.Text.Trim();
+            Model.Host = txtHost.Text.Trim();
+            Model.Port = Convert.ToInt32(nudPort.Value);
             Model.Password = txtPassword.Text.Trim();
-            Model.EnableCompress = cbEnableCompress.Checked;
-            Model.EnableEncrypt = cbEnableEncrypt.Checked;
 
             this.DialogResult = DialogResult.OK;
             this.Close();

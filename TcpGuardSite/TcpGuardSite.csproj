@@ -12,7 +12,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TcpGuard.Core\TcpGuard.Core.csproj" />
-    <ProjectReference Include="..\TcpGuard.Server.WebSocket\TcpGuard.Server.WebSocket.csproj" />
   </ItemGroup>
 
   <ItemGroup>
