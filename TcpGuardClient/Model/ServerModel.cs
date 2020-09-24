@@ -6,9 +6,10 @@ namespace TcpGuardClient.Model
 {
     public class ServerModel
     {
-        public string Host { get; set; }
-        public int Port { get; set; }
+        public string Url { get; set; }
         public string Password { get; set; }
+        public bool EnableCompress { get; set; }
+        public bool EnableEncrypt { get; set; }
 
         public List<PortalModel> PortalList { get; set; } = new List<PortalModel>();        
 
